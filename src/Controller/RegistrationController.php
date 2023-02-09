@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\CompanyProfile;
+use App\Entity\IndividualProfile;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
@@ -41,6 +43,47 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            switch ($form->get('profile')->getData()) {
+                case 'individual':
+                    $firstName = $form->get('individualProfile')->get('firstName')->getData();
+                    $lastName = $form->get('individualProfile')->get('lastName')->getData();
+
+                    if (empty($firstName) || empty($lastName)) {
+                        $this->addFlash('error', 'Veuillez renseigner votre nom et prénom');
+
+                        return $this->renderForm('registration/register.html.twig', [
+                            'form' => $form,
+                        ]);
+                    }
+
+                    $user->setIndividualProfile((new IndividualProfile())
+                        ->setFirstName($firstName)
+                        ->setLastName($lastName)
+                    );
+                    break;
+                case 'company':
+                    $name = $form->get('companyProfile')->get('name')->getData();
+
+                    if (empty($name)) {
+                        $this->addFlash('error', 'Veuillez renseigner le nom de votre entreprise');
+
+                        return $this->renderForm('registration/register.html.twig', [
+                            'form' => $form,
+                        ]);
+                    }
+
+                    $user->setCompanyProfile((new CompanyProfile())
+                        ->setName($name)
+                    );
+                    break;
+                default:
+                    $this->addFlash('error', 'Veuillez renseigner votre profil');
+
+                    return $this->renderForm('registration/register.html.twig', [
+                        'form' => $form,
+                    ]);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -57,8 +100,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('registration/register.html.twig', [
+            'form' => $form,
         ]);
     }
 

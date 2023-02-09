@@ -13,7 +13,7 @@
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     {% if error %}
-                                        <div class="alert alert-danger"><strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        <div class="alert alert-danger"> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                     {% endif %}
 
                                     <form action="{{ path('app_login') }}" method="POST">
