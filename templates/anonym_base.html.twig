@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Collabus Events{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+        {% block stylesheets %}
+            {# {{ encore_entry_link_tags('app') }} #}
+        {% endblock %}
+    </head>
+    <body class="h-100">
+        {% block body %}{% endblock %}
+
+        <!-- Required vendors -->
+        <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('js/quixnav-init.js') }}"></script>
+        <script src="{{ asset('js/custom.min.js') }}"></script>
+
+        {% block javascripts %}
+            {# {{ encore_entry_script_tags('app') }} #}
+        {% endblock %}
+    </body>
+</html>
