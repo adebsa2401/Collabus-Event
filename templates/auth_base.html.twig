@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Collabus Events{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+        <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.theme.default.min.css') }}">
+        <link href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+        {% block stylesheets %}
+            {# {{ encore_entry_link_tags('app') }} #}
+        {% endblock %}
+    </head>
+    <body>
+        {{ include('partials/_preloader.html.twig') }}
+
+        <div id="main-wrapper">
+            {{ include('partials/_nav_header.html.twig') }}
+            {{ include('partials/_header.html.twig') }}
+            {{ include('partials/_sidebar.html.twig') }}
+
+            {% block body %}{% endblock %}
+
+            {{ include('partials/_footer.html.twig') }}
+        </div>
+
+        <!-- Required vendors -->
+        <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('js/quixnav-init.js') }}"></script>
+        <script src="{{ asset('js/custom.min.js') }}"></script>
+
+        <!-- Vectormap -->
+        <script src="{{ asset('vendor/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('vendor/morris/morris.min.js') }}"></script>
+        <script src="{{ asset('vendor/circle-progress/circle-progress.min.js') }}"></script>
+        <script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+
+        <!--  flot-chart js -->
+        <script src="{{ asset('vendor/flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('vendor/flot/jquery.flot.resize.js') }}"></script>
+
+        <!-- Owl Carousel -->
+        <script src="{{ asset('vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+
+        <!-- Counter Up -->
+        <script src="{{ asset('vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+        <script src="{{ asset('vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+        <script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
+
+        {% block javascripts %}
+            {# {{ encore_entry_script_tags('app') }} #}
+        {% endblock %}
+    </body>
+</html>
