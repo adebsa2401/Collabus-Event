@@ -20,6 +20,7 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                default_target_path: app_home
             logout:
                 path: app_logout
                 target: app_login
@@ -35,7 +36,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/company, roles: ROLE_COMPANY }
+        - { path: ^/individual, roles: ROLE_INDIVIDUAL }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

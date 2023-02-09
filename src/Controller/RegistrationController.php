@@ -56,10 +56,13 @@ class RegistrationController extends AbstractController
                         ]);
                     }
 
-                    $user->setIndividualProfile((new IndividualProfile())
-                        ->setFirstName($firstName)
-                        ->setLastName($lastName)
-                    );
+                    $user
+                        ->setIndividualProfile((new IndividualProfile())
+                            ->setFirstName($firstName)
+                            ->setLastName($lastName)
+                        )
+                        ->setRoles(['ROLE_INDIVIDUAL'])
+                    ;
                     break;
                 case 'company':
                     $name = $form->get('companyProfile')->get('name')->getData();
@@ -72,9 +75,12 @@ class RegistrationController extends AbstractController
                         ]);
                     }
 
-                    $user->setCompanyProfile((new CompanyProfile())
-                        ->setName($name)
-                    );
+                    $user
+                        ->setCompanyProfile((new CompanyProfile())
+                            ->setName($name)
+                        )
+                        ->setRoles(['ROLE_COMPANY'])
+                    ;
                     break;
                 default:
                     $this->addFlash('error', 'Veuillez renseigner votre profil');

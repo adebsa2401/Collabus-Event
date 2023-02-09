@@ -19,9 +19,15 @@
 
         <div id="main-wrapper">
             {{ include('partials/_nav_header.html.twig') }}
-            {{ include('partials/_header.html.twig') }}
-            {{ include('partials/_sidebar.html.twig') }}
 
+            {% block header %}
+                {{ include('partials/_header.html.twig') }}
+            {% endblock %}
+
+            {% block sidebar %}
+                {{ include('partials/_sidebar.html.twig') }}
+            {% endblock %}
+            
             {% block body %}{% endblock %}
 
             {{ include('partials/_footer.html.twig') }}
