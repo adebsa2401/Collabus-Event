@@ -1,6 +1,6 @@
 {% extends 'anonym_base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Reset your password{% endblock %}
 
 {% block body %}
     <div class="authincation h-100">
@@ -11,30 +11,15 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <h4 class="text-center mb-4">Register</h4>
+                                    <h4 class="text-center mb-4">Reset your password</h4>
                                     {{ form_start(form) }}
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
                                             {{ form_widget(form.email, {"attr": {"class": "form-control"}}) }}
                                         </div>
 
-                                        <div class="form-group">
-                                            <label><strong>Mot de passe</strong></label>
-                                            {{ form_widget(form.plainPassword.first, {"attr": {"class": "form-control"}}) }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label><strong>Confirmer mot de passe</strong></label>
-                                            {{ form_widget(form.plainPassword.second, {"attr": {"class": "form-control"}}) }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {{ form_widget(form.agreeTerms) }}
-                                            <label><strong>Agree terms</strong></label>
-                                        </div>
-
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Reset password</button>
                                         </div>
                                     {{ form_end(form) }}
                                     <div class="new-account mt-3">

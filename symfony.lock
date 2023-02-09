@@ -276,9 +276,6 @@
             "config/packages/messenger.yaml"
         ]
     },
-    "symfonycasts/verify-email-bundle": {
-        "version": "v1.13.0"
-    },
     "symfony/webpack-encore-bundle": {
         "version": "1.16",
         "recipe": {
@@ -297,6 +294,21 @@
             "package.json",
             "webpack.config.js"
         ]
+    },
+    "symfonycasts/reset-password-bundle": {
+        "version": "1.17",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
+        },
+        "files": [
+            "config/packages/reset_password.yaml"
+        ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.13.0"
     },
     "twig/extra-bundle": {
         "version": "v3.5.0"
