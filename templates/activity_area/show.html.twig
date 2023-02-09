@@ -1,0 +1,67 @@
+{% extends "admin_dashboard.html.twig" %}
+
+{% block body %}
+    <div class="content-body">
+        <div class="container-fluid">
+            {{ include('partials/_page_title.html.twig', {'titles': {'Secteurs d\'activité': path('app_activity_area_index'), (activity_area.name): ''}}) }}
+            <!-- row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Entreprises du secteur {{ activity_area.name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="display" style="min-width: 845px">
+                                    {% if activity_area.companies|length > 0 %}
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nom</th>
+                                                <th>Owner</th>
+                                                <th>Collaborators</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for company in activity_area.companies %}
+                                                <tr>
+                                                    <td>{{ loop.index }}</td>
+                                                    <td>{{ company.name }}</td>
+                                                    <td>{{ company.owner.name }}</td>
+                                                    <td>{{ company.collaborators|length }}</td>
+                                                    <td>
+                                                        <a href="{{ path('app_company_show', {'id': company.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+                                                            <i class="fa fa-eye text-info"></i>
+                                                        </a>
+                                                        <a data-toggle="modal" data-target="#deletePopup">
+                                                            <i class="fa fa-window-close text-danger"></i>
+                                                        </a>
+                                                        {{ include('partials/_delete_popup.html.twig', {'action': path('app_company_delete', {'id': company.id})}) }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    {% else %}
+                                        Aucune entreprise n'a été trouvée
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ row -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#confirmButton').click(function () {
+            window.location.href = $(this).attr('href');
+        });
+    </script
+{% endblock %}
