@@ -25,6 +25,9 @@ class Company
     #[ORM\ManyToMany(targetEntity: ActivityArea::class, mappedBy: 'companies')]
     private Collection $activityAreas;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->collaborators = new ArrayCollection();
@@ -95,6 +98,18 @@ class Company
         if ($this->activityAreas->removeElement($activityArea)) {
             $activityArea->removeCompany($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
