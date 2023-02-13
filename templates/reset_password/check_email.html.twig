@@ -1,0 +1,28 @@
+{% extends 'anonym_base.html.twig' %}
+
+{% block title %}Reset your password
+{% endblock %}
+
+{% block body %}
+	<div class="authincation h-100">
+		<div class="container-fluid h-100">
+			<div class="row justify-content-center h-100 align-items-center">
+				<div class="col-md-6">
+					<div class="authincation-content">
+						<div class="row no-gutters">
+							<div class="col-xl-12">
+								<p>
+									If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+									        This link will expire in
+									{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+								</p>
+								<p>If you don't receive an email please check your spam folder or
+									<a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

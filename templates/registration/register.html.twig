@@ -1,0 +1,91 @@
+{% extends 'anonym_base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="authincation h-100">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Register</h4>
+                                    {% for error in app.flashes('error') %}
+                                        <div class="alert alert-danger"> {{ error }}</div>
+                                    {% endfor %}
+
+                                    {{ form_start(form) }}
+                                        <div class="form-group">
+                                            <label><strong>Email</strong></label>
+                                            {{ form_widget(form.email, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><strong>Profile</strong></label>
+                                            {{ form_widget(form.profile, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group user-profile-info individual-info">
+                                            <label><strong>Nom</strong></label>
+                                            {{ form_widget(form.individualProfile.lastName, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group user-profile-info individual-info">
+                                            <label><strong>Prénoms</strong></label>
+                                            {{ form_widget(form.individualProfile.firstName, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group user-profile-info company-info" style="display: none">
+                                            <label><strong>Nom de l'entreprise</strong></label>
+                                            {{ form_widget(form.companyProfile.name, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><strong>Mot de passe</strong></label>
+                                            {{ form_widget(form.plainPassword.first, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><strong>Confirmer mot de passe</strong></label>
+                                            {{ form_widget(form.plainPassword.second, {"attr": {"class": "form-control"}}) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form_widget(form.agreeTerms) }}
+                                            <label><strong>Agree terms</strong></label>
+                                        </div>
+
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                        </div>
+                                    {{ form_end(form) }}
+                                    <div class="new-account mt-3">
+                                        <p>Do you have an account? <a class="text-primary" href="{{ path('app_login') }}">Sign in</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('#registration_form_profile').on('change', function() {
+                $('.user-profile-info').hide();
+                
+                if ($(this).val() == 'individual') {
+                    $('.individual-info').show();
+                } else if ($(this).val() == 'company') {
+                    $('.company-info').show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

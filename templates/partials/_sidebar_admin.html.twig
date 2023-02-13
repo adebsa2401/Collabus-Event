@@ -1,0 +1,41 @@
+{% extends "partials/_sidebar.html.twig" %}
+
+{% block title %}Dashboard (Admin){% endblock %}
+
+{% block menu %}
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-single-04"></i><span class="nav-text">Utilisateurs</span></a>
+        <ul aria-expanded="false">
+            <li><a href="#">Particuliers</a></li>
+            <li><a href="#">Entreprises</a></li>
+        </ul>
+    </li>
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-app-store"></i><span class="nav-text">Secteurs d'activité</span></a>
+        <ul aria-expanded="false">
+            <li><a href="{{ path('app_activity_area_index') }}">Tous les secteurs d'activité</a></li>
+            <li><a href="{{ path('app_activity_area_new') }}">Ajouter un secteur d'activité</a></li>
+        </ul>
+    </li>
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-app-store"></i><span class="nav-text">Points de rencontre</span></a>
+        <ul aria-expanded="false">
+            <li><a href="#">Tous les points de rencontre</a></li>
+            <li><a href="#">Ajouter un point de rencontre</a></li>
+        </ul>
+    </li>
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-app-store"></i><span class="nav-text">Types d'évènement</span></a>
+        <ul aria-expanded="false">
+            <li><a href="#">Tous les types d'évènement</a></li>
+            <li><a href="#">Ajouter un type d'évènement</a></li>
+        </ul>
+    </li>
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                class="icon icon-app-store"></i><span class="nav-text">Evènements</span></a>
+        <ul aria-expanded="false">
+            <li><a href="#">Tous les évènements</a></li>
+            <li><a href="#">Ajouter un évènement</a></li>
+        </ul>
+    </li>
+{% endblock %}

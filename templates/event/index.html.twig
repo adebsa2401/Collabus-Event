@@ -1,0 +1,76 @@
+{% extends "admin_dashboard.html.twig" %}
+
+{% block body %}
+    <div class="content-body">
+        <div class="container-fluid">
+            {{ include('partials/_page_title.html.twig', {'titles': {'Mes Evenements': ''}}) }}
+            <!-- row -->
+
+                 <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Evenements</h4>
+                            <a href="{{ path('app_event_new') }}" class="btn btn-primary">Ajouter <span
+                                    class="btn-icon-right"><i class="fa fa-plus"></i></span>
+                            </a>
+                            
+                   </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="display" style="min-width: 845px">
+                                    {% if events|length > 0 %}
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>StartedAt</th>
+                                                <th>EndedAt</th>
+                                                <th>actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for event in events %}
+                            <tr>
+                                <td>{{ event.id }}</td>
+                                <td>{{ event.name }}</td>
+                                <td>{{ event.startedAt ? event.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ event.endedAt ? event.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('app_event_show', {'id': event.id}) }}"  data-toggle="tooltip" data-placement="top" title="Consulter">
+                                                            <i class="fa fa-eye text-info"></i>
+                                    </a>
+                                    <a href="{{ path('app_event_edit', {'id': event.id}) }}"  data-toggle="tooltip" data-placement="top" title="Consulter">
+                                                            <i class="fa fa-edit text-success"></i>
+                                    </a>
+
+                                    <a data-toggle="modal" data-target="#deletePopup">
+                                        <i class="fa fa-window-close text-danger"></i>
+                                    </a>
+
+                                    {{ include('partials/_delete_popup.html.twig', {'action': path('app_event_delete', {'id': event.id})}) }}
+                                </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    {% else %}
+                                        Aucun evenement n'a été trouvée
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ row -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#confirmButton').click(function () {
+            window.location.href = $(this).attr('href');
+        });
+    </script
+{% endblock %}

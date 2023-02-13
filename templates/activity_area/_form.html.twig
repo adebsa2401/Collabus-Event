@@ -1,0 +1,29 @@
+<div class="content-body">
+    <div class="container-fluid">
+        {{ include('partials/_page_title.html.twig', {'titles': {'Secteurs d\'activité': path('app_activity_area_index'), 'Ajouter un secteur d\'activité': ''}}) }}
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Ajouter un secteur d'activité</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            {{ form_start(form) }}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}  
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom du secteur d\'activité'}}) }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-3">{{ submit_label ?? 'Enregistrer' }}</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ row --> 
+    </div>
+</div>
