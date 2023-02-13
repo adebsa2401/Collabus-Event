@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.carousel.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.theme.default.min.css') }}">
         <link href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
         {% block stylesheets %}
@@ -57,6 +58,9 @@
         <script src="{{ asset('vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
         <script src="{{ asset('vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
         <script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
+
+        <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
 
         {% block javascripts %}
             {# {{ encore_entry_script_tags('app') }} #}

@@ -43,6 +43,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function getFullName(): ?string
+    {
+        if (in_array('ROLE_ADMIN', $this->getRoles())) {
+            return "Admin ({$this->getEmail()})";
+        }
+
+        if ($this->getIndividualProfile()) {
+            return $this->getIndividualProfile()->getFirstName() . ' ' . $this->getIndividualProfile()->getLastName();
+        }
+
+        if ($this->getCompanyProfile()) {
+            return $this->getCompanyProfile()->getName();
+        }
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;

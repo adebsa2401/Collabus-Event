@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\ActivityArea;
 use App\Entity\Company;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +17,14 @@ class CompanyType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom',
+            ])
+            ->add('activityAreas', EntityType::class, [
+                'class' => ActivityArea::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => false,
+                'by_reference' => false,
+                'label' => 'Secteurs d\'activité',
             ])
         ;
     }

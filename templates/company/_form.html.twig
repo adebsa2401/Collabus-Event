@@ -16,6 +16,11 @@
                                         {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}  
                                         {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'entreprise'}}) }}
                                     </div>
+
+                                    <div class="col-sm-6">
+                                        {{ form_label(form.activityAreas, 'Secteurs d\'activité', {'label_attr': {'class': 'form-label'}}) }}  
+                                        {{ form_widget(form.activityAreas, {'attr': {'class': 'disabling-options'}}) }}
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">{{ submit_label ?? 'Enregistrer' }}</button>
                             {{ form_end(form) }}

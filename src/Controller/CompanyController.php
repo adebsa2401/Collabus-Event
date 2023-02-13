@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Entity\CompanyProfile;
+use App\Entity\User;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,17 +23,26 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    #[Route('/my-companies', name: 'app_company_by_company_profile_index', methods: ['GET'])]
+    public function indexByCompanyProfile(): Response
+    {   
+        return $this->render('company/index.html.twig', [
+            'companies' => $this->getUser()->getCompanyProfile()->getCompanies(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_company_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CompanyRepository $companyRepository): Response
     {
-        $company = new Company();
+        $company = (new Company())
+            ->setOwner($this->getUser()->getCompanyProfile());
         $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $companyRepository->save($company, true);
 
-            return $this->redirectToRoute('app_company_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_company_by_company_profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('company/new.html.twig', [
@@ -57,7 +68,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $companyRepository->save($company, true);
 
-            return $this->redirectToRoute('app_company_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_company_by_company_profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('company/edit.html.twig', [
@@ -76,6 +87,6 @@ class CompanyController extends AbstractController
             $companyRepository->remove($company, true);
         }
 
-        return $this->redirectToRoute('app_company_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_company_by_company_profile_index', [], Response::HTTP_SEE_OTHER);
     }
 }
