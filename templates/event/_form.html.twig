@@ -29,12 +29,12 @@
 
                                     <div class="col-sm-6">
                                         {{ form_label(form.startedAt, 'Démarre le', {'label_attr': {'class': 'form-label'}}) }}  
-                                        {{ form_widget(form.startedAt, {'attr': {'class': 'disabling-options'}}) }}
+                                        {{ form_widget(form.startedAt, {'attr': {'class': 'form-control'}}) }}
                                     </div>
 
                                     <div class="col-sm-6">
                                         {{ form_label(form.endedAt, 'Fini le', {'label_attr': {'class': 'form-label'}}) }}  
-                                        {{ form_widget(form.endedAt, {'attr': {'class': 'disabling-options'}}) }}
+                                        {{ form_widget(form.endedAt, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">{{ submit_label ?? 'Enregistrer' }}</button>

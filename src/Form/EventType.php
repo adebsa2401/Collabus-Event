@@ -26,6 +26,7 @@ class EventType extends AbstractType
             ->add('startedAt', DateType::class, [
                 'label' => 'Commence le',
                 'widget' => 'single_text',
+                'input' => 'datetime_immutable',
                 'attr' => [
                     'placeholder' => 'Commence le',
                 ],
@@ -33,6 +34,7 @@ class EventType extends AbstractType
             ->add('endedAt', DateType::class, [
                 'label' => 'Fini le',
                 'widget' => 'single_text',
+                'input' => 'datetime_immutable',
                 'attr' => [
                     'placeholder' => 'Fini le',
                 ],
@@ -49,7 +51,6 @@ class EventType extends AbstractType
                 'class' => Place::class,
                 'choice_label' => 'name',
                 'label' => 'Lieu',
-                'required' => false,
                 'attr' => [
                     'placeholder' => 'Choisir le lieu',
                 ],
