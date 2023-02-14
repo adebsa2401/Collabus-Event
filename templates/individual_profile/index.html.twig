@@ -3,39 +3,41 @@
 {% block body %}
 	<div class="content-body">
 		<div class="container-fluid">
-			{{ include('partials/_page_title.html.twig', {'titles': {'Utilisateurs': '', 'Entreprises': ''}}) }}
+			{{ include('partials/_page_title.html.twig', {'titles': {'Utilisateurs': '', 'Particuliers': ''}}) }}
 			<!-- row -->
 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Entreprises</h4>
+							<h4 class="card-title">Particuliers</h4>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table id="example" class="display" style="min-width: 845px">
-									{% if company_profiles|length > 0 %}
+									{% if individual_profiles|length > 0 %}
 										<thead>
 											<tr>
 												<th>#</th>
 												<th>Nom</th>
+												<th>Prénoms</th>
 												<th>Email</th>
-												<th>Entreprises</th>
+												<th>Collaborations</th>
 												<th>Verifié</th>
 												<th>actions</th>
 											</tr>
 										</thead>
 										<tbody>
-											{% for company_profile in company_profiles %}
+											{% for individual_profile in individual_profiles %}
 												<tr>
 													<td>{{ loop.index }}</td>
-													<td>{{ company_profile.name }}</td>
-													<td>{{ company_profile.user.email }}</td>
-													<td>{{ company_profile.companies|length }}</td>
-													<td>{{ company_profile.user.isVerified ? 'Oui' : 'Non' }}</td>
+													<td>{{ individual_profile.lastName }}</td>
+													<td>{{ individual_profile.firstName }}</td>
+													<td>{{ individual_profile.user.email }}</td>
+													<td>{{ individual_profile.collaborationCompanies|length }}</td>
+													<td>{{ individual_profile.user.isVerified ? 'Oui' : 'Non' }}</td>
 													<td>
-														<a href="{{ path('app_company_profile_show', {'id': company_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+														<a href="{{ path('app_individual_profile_show', {'id': individual_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
 															<i class="fa fa-eye text-info"></i>
 														</a>
 													</td>
@@ -43,7 +45,7 @@
 											{% endfor %}
 										</tbody>
 									{% else %}
-										Aucun compte entreprise n'a été trouvé
+										Aucun compte particulier n'a été trouvé
 									{% endif %}
 								</table>
 							</div>
