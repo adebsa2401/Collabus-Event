@@ -1,74 +1,64 @@
 {% extends "admin_dashboard.html.twig" %}
 
 {% block body %}
-    <div class="content-body">
-        <div class="container-fluid">
-            {{ include('partials/_page_title.html.twig', {'titles': {'Mes Entreprises': ''}}) }}
-            <!-- row -->
+	<div class="content-body">
+		<div class="container-fluid">
+			{{ include('partials/_page_title.html.twig', {'titles': {'Utilisateurs': '', 'Entreprises': ''}}) }}
+			<!-- row -->
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Entreprises</h4>
-                            <a href="{{ path('app_company_profile_new') }}" class="btn btn-primary">Ajouter <span
-                                    class="btn-icon-right"><i class="fa fa-plus"></i></span>
-                            </a>
-
-                     </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example" class="display" style="min-width: 845px">
-                                    {% if companies|length > 0 %}
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for company_profile in company_profiles %}
-                                            <tr>
-                                                <td>{{ company_profile.id }}</td>
-                                                <td>{{ company_profile.name }}</td>
-                                                <td>
-                                                    <a href="{{ path('app_company_profile_show', {'id': company_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-                                                            <i class="fa fa-eye text-info"></i>
-                                                    </a>
-                                                    <a href="{{ path('app_company_profile_edit', {'id': company_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier">
-                                                            <i class="fa fa-edit text-success"></i>
-                                                    </a>
-
-                                                        <a data-toggle="modal" data-target="#deletePopup">
-                                                            <i class="fa fa-window-close text-danger"></i>
-                                                        </a>
-                                                        {{ include('partials/_delete_popup.html.twig', {'action': path('app_company_profile_delete', {'id': company.id})}) }}
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    {% else %}
-                                        Aucun Profil entreprise n'a été trouvée
-                                    {% endif %}
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ row -->
-        </div>
-    </div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">Entreprises</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="min-width: 845px">
+									{% if company_profiles|length > 0 %}
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Nom</th>
+												<th>Email</th>
+												<th>Entreprises</th>
+												<th>Verifié</th>
+												<th>actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for company_profile in company_profiles %}
+												<tr>
+													<td>{{ loop.index }}</td>
+													<td>{{ company_profile.name }}</td>
+													<td>{{ company_profile.user.email }}</td>
+													<td>{{ company_profile.companies|length }}</td>
+													<td>{{ company_profile.user.isVerified ? 'Oui' : 'Non' }}</td>
+													<td>
+														<a href="{{ path('app_company_profile_show', {'id': company_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+															<i class="fa fa-eye text-info"></i>
+														</a>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									{% else %}
+										Aucun compte entreprise n'a été trouvée
+									{% endif %}
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- #/ row -->
+		</div>
+	</div>
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        $('#confirmButton').click(function () {
-            window.location.href = $(this).attr('href');
-        });
-    </script
-{% endblock %}
-
-
-                                            
+<script>
+	$('#confirmButton').click(function () {
+window.location.href = $(this).attr('href');
+});
+</script {% endblock %}
