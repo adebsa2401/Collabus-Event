@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-
-<title>New Event</title>
+{% extends "admin_dashboard.html.twig" %}
 
 {% block body %}
-    <h1>Create new Event</h1>
-
     {{ include('event/_form.html.twig') }}
-
-    <a href="{{ path('app_event_index') }}">back to list</a>
 {% endblock %}
