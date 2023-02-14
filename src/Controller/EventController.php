@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
+    #[IsGranted('EVENT_CREATE')]
     public function new(Request $request, EventRepository $eventRepository): Response
     {
         $event = new Event();
@@ -41,6 +43,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
+    #[IsGranted('EVENT_VIEW', subject: 'event')]
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', [
@@ -49,6 +52,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('EVENT_EDIT', subject: 'event')]
     public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
@@ -67,6 +71,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
+    #[IsGranted('EVENT_DELETE', subject: 'event')]
     public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         $isGet = $request->isMethod('GET');

@@ -2,18 +2,20 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Company;
+use App\Entity\Event;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class CompanyVoter extends Voter
+class EventVoter extends Voter
 {
-    public const CREATE = 'COMPANY_CREATE';
-    public const EDIT = 'COMPANY_EDIT';
-    public const VIEW = 'COMPANY_VIEW';
+    public const CREATE = 'EVENT_CREATE';
+    public const EDIT = 'EVENT_EDIT';
+    public const VIEW = 'EVENT_VIEW';
+    public const DELETE = 'EVENT_DELETE';
+
 
     private $security;
 
@@ -26,8 +28,8 @@ class CompanyVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return (in_array($attribute, [self::VIEW, self::EDIT])
-            && $subject instanceof \App\Entity\Company)
+        return (in_array($attribute, [self::EDIT, self::VIEW, self::DELETE])
+            && $subject instanceof \App\Entity\Event)
             || (in_array($attribute, [self::CREATE]));
     }
 
@@ -43,31 +45,30 @@ class CompanyVoter extends Voter
             self::CREATE => $this->canCreate($subject, $user),
             self::EDIT => $this->canEdit($subject, $user),
             self::VIEW => $this->canView($subject, $user),
+            self::DELETE => $this->canDelete($subject, $user),
             default => false,
         };
     }
 
-    private function canCreate(Company $company, User $user)
+    private function canCreate(Event $event, User $user)
     {
-        if ($user->getCompanyProfile()) {
-            return true;
-        }
-        return false;
+        return $this->security->isGranted('ROLE_ADMIN');
     }
 
-    private function canEdit(Company $company, User $user)
+    private function canEdit(Event $event, User $user)
     {
-        if ($company->getOwner() === $user->getCompanyProfile()) {
-            return true;
-        }
-        return false;
+        return $this->security->isGranted('ROLE_ADMIN');
     }
 
-    private function canView(Company $company, User $user)
+    private function canView(Event $event, User $user)
     {
-        if ($this->security->isGranted('ROLE_ADMIN') || $company->getOwner() === $user->getCompanyProfile()) {
-            return true;
-        }
-        return false;
+        return $this->security->isGranted('ROLE_ADMIN')
+            || $this->security->isGranted('ROLE_COMPANY')
+        ;
+    }
+
+    private function canDelete(Event $event, User $user)
+    {
+        return $this->security->isGranted('ROLE_ADMIN');
     }
 }
