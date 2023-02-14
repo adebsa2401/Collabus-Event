@@ -34,8 +34,8 @@
 													<td>{{ event.name }}</td>
 													<td>{{ event.type.name }}</td>
 													<td>{{ event.place ? event.place.name : '-' }}</td>
-													<td>{{ event.startedAt ? event.startedAt|date() : '' }}</td>
-													<td>{{ event.endedAt ? event.endedAt|date() : '' }}</td>
+													<td>{{ event.startedAt ? event.startedAt|date('Y/m/d') : '' }}</td>
+													<td>{{ event.endedAt ? event.endedAt|date('Y/m/d') : '' }}</td>
 													<td>
 														<a href="{{ path('app_event_show', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
 															<i class="fa fa-eye text-info"></i>

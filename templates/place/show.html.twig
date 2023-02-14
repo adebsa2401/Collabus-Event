@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>Place</title>
+
+{% block body %}
+    <h1>Place</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ place.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ place.name }}</td>
+            </tr>
+            <tr>
+                <th>StandCount</th>
+                <td>{{ place.standCount }}</td>
+            </tr>
+            <tr>
+                <th>SitCount</th>
+                <td>{{ place.sitCount }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_place_index') }}">back to list</a>
+
+    <a href="{{ path('app_place_edit', {'id': place.id}) }}">edit</a>
+
+    {{ include('place/_delete_form.html.twig') }}
+{% endblock %}
