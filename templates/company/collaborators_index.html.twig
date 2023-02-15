@@ -3,38 +3,37 @@
 {% block body %}
     <div class="content-body">
         <div class="container-fluid">
-            {{ include('partials/_page_title.html.twig', {'titles': {'Mes Entreprises': path('app_company_by_company_profile_index'), (company.name): ''}}) }}
+            {{ include('partials/_page_title.html.twig', {'titles': {'Mes Collaborateurs': ''}}) }}
             <!-- row -->
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">{{ company.name }} (Collaborateurs)</h4>
-                            <a href="{{ path('app_company_add_collaborators', {'id': company.id}) }}" class="btn btn-primary">Ajouter <span
-                                class="btn-icon-right"><i class="fa fa-plus"></i></span>
-                            </a>
+                            <h4 class="card-title">Collaborateurs</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="example" class="display" style="min-width: 845px">
-                                    {% if company.collaborators|length > 0 %}
+                                    {% if collaborators|length > 0 %}
                                         <thead>
                                             <tr>
 												<th>#</th>
 												<th>Nom</th>
 												<th>Prénoms</th>
 												<th>Email</th>
+												<th>Entreprise</th>
 												<th>actions</th>
 											</tr>
                                         </thead>
                                         <tbody>
-                                            {% for collaborator in company.collaborators %}
+                                            {% for collaborator in collaborators %}
                                                 <tr>
                                                     <td>{{ loop.index }}</td>
 													<td>{{ collaborator.lastName }}</td>
 													<td>{{ collaborator.firstName }}</td>
 													<td>{{ collaborator.user.email }}</td>
+													<td>{{ collaborator.company.name }}</td>
 													<td>
 														<a href="{{ path('app_individual_profile_show', {'id': collaborator.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
 															<i class="fa fa-eye text-info"></i>

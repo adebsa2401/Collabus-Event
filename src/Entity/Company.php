@@ -19,19 +19,19 @@ class Company
     #[ORM\JoinColumn(nullable: false)]
     private ?CompanyProfile $owner = null;
 
-    #[ORM\ManyToMany(targetEntity: IndividualProfile::class, inversedBy: 'collaborationCompanies')]
-    private Collection $collaborators;
-
     #[ORM\ManyToMany(targetEntity: ActivityArea::class, mappedBy: 'companies')]
     private Collection $activityAreas;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: IndividualProfile::class)]
+    private Collection $collaborators;
+
     public function __construct()
     {
-        $this->collaborators = new ArrayCollection();
         $this->activityAreas = new ArrayCollection();
+        $this->collaborators = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,30 +47,6 @@ class Company
     public function setOwner(?CompanyProfile $owner): self
     {
         $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, IndividualProfile>
-     */
-    public function getCollaborators(): Collection
-    {
-        return $this->collaborators;
-    }
-
-    public function addCollaborator(IndividualProfile $collaborator): self
-    {
-        if (!$this->collaborators->contains($collaborator)) {
-            $this->collaborators->add($collaborator);
-        }
-
-        return $this;
-    }
-
-    public function removeCollaborator(IndividualProfile $collaborator): self
-    {
-        $this->collaborators->removeElement($collaborator);
 
         return $this;
     }
@@ -110,6 +86,36 @@ class Company
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, IndividualProfile>
+     */
+    public function getCollaborators(): Collection
+    {
+        return $this->collaborators;
+    }
+
+    public function addCollaborator(IndividualProfile $collaborator): self
+    {
+        if (!$this->collaborators->contains($collaborator)) {
+            $this->collaborators->add($collaborator);
+            $collaborator->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCollaborator(IndividualProfile $collaborator): self
+    {
+        if ($this->collaborators->removeElement($collaborator)) {
+            // set the owning side to null (unless already changed)
+            if ($collaborator->getCompany() === $this) {
+                $collaborator->setCompany(null);
+            }
+        }
 
         return $this;
     }

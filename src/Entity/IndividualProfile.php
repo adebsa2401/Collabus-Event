@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\IndividualProfileRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IndividualProfileRepository::class)]
@@ -25,13 +23,8 @@ class IndividualProfile
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[ORM\ManyToMany(targetEntity: Company::class, mappedBy: 'collaborators')]
-    private Collection $collaborationCompanies;
-
-    public function __construct()
-    {
-        $this->collaborationCompanies = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'collaborators')]
+    private ?Company $company = null;
 
     public function getId(): ?int
     {
@@ -74,29 +67,14 @@ class IndividualProfile
         return $this;
     }
 
-    /**
-     * @return Collection<int, Company>
-     */
-    public function getCollaborationCompanies(): Collection
+    public function getCompany(): ?Company
     {
-        return $this->collaborationCompanies;
+        return $this->company;
     }
 
-    public function addCollaborationCompany(Company $collaborationCompany): self
+    public function setCompany(?Company $company): self
     {
-        if (!$this->collaborationCompanies->contains($collaborationCompany)) {
-            $this->collaborationCompanies->add($collaborationCompany);
-            $collaborationCompany->addCollaborator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCollaborationCompany(Company $collaborationCompany): self
-    {
-        if ($this->collaborationCompanies->removeElement($collaborationCompany)) {
-            $collaborationCompany->removeCollaborator($this);
-        }
+        $this->company = $company;
 
         return $this;
     }

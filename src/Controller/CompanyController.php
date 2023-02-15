@@ -54,6 +54,18 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    #[Route('/collaborators', name: 'app_company_collaborators_index', methods: ['GET'])]
+    public function collaboratorsIndex(): Response
+    {
+        $collaborators = [];
+        foreach ($this->getUser()->getCompanyProfile()->getCompanies() as $company) {
+            $collaborators = array_merge($collaborators, $company->getCollaborators()->toArray());
+        }
+        return $this->render('company/collaborators_index.html.twig', [
+            'collaborators' => $collaborators,
+        ]);
+    }
+
     #[Route('/{id}/add-collaborators', name: 'app_company_add_collaborators', methods: ['GET', 'POST'])]
     public function addCollaborators(Request $request, Company $company, CompanyRepository $companyRepository, IndividualProfileRepository $individualProfileRepository): Response
     {
@@ -76,6 +88,21 @@ class CompanyController extends AbstractController
             'company' => $company,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/remove-collaborator/{id}', name: 'app_company_remove_collaborator', methods: ['GET', 'POST'])]
+    public function removeCollaborator(Request $request, IndividualProfileRepository $individualProfileRepository, IndividualProfile $individualProfile): Response
+    {
+        $isGet = $request->isMethod('GET');
+        $isPost = $request->isMethod('POST') && $this->isCsrfTokenValid('delete'.$individualProfile->getId(), $request->request->get('_token'));
+        $company = $individualProfile->getCompany();
+        
+        if ($isGet || $isPost) {
+            $individualProfile->setCompany(null);
+            $individualProfileRepository->save($individualProfile, true);
+        }
+
+        return $this->redirectToRoute('app_company_show', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_company_show', methods: ['GET'])]
