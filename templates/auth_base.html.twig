@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.theme.default.min.css') }}">
         <link href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+        <!-- Datatable -->
+        <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
         {% block stylesheets %}
@@ -61,6 +63,10 @@
 
         <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
         <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
+
+        <!-- Datatable -->
+        <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
         {% block javascripts %}
             {# {{ encore_entry_script_tags('app') }} #}

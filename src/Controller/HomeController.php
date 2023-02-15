@@ -9,7 +9,8 @@ use Symfony\Component\Security\Core\Security;
 
 class HomeController extends AbstractController
 {
-    #[Route('/dashboard', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
+    #[Route('/dashboard', name: 'app_dashboard')]
     public function home(Security $security): Response
     {
         if ($security->isGranted('ROLE_ADMIN')) {
