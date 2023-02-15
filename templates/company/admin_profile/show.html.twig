@@ -1,0 +1,63 @@
+{% extends "admin_dashboard.html.twig" %}
+
+{% block body %}
+    <div class="content-body">
+        <div class="container-fluid">
+            {{ include('partials/_page_title.html.twig', {'titles': {'Entreprises': path('app_company_index'), (company.name): ''}}) }}
+            <!-- row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{ company.name }} (Collaborateurs)</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example" class="display" style="min-width: 845px">
+                                    {% if company.collaborators|length > 0 %}
+                                        <thead>
+                                            <tr>
+												<th>#</th>
+												<th>Nom</th>
+												<th>Prénoms</th>
+												<th>Email</th>
+												<th>actions</th>
+											</tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for collaborator in company.collaborators %}
+                                                <tr>
+                                                    <td>{{ loop.index }}</td>
+													<td>{{ collaborator.lastName }}</td>
+													<td>{{ collaborator.firstName }}</td>
+													<td>{{ collaborator.user.email }}</td>
+													<td>
+														<a href="{{ path('app_individual_profile_show', {'id': individual_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+															<i class="fa fa-eye text-info"></i>
+														</a>
+													</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    {% else %}
+                                        Aucun Collaborateur n'a été trouvé
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ row -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#confirmButton').click(function () {
+            window.location.href = $(this).attr('href');
+        });
+    </script
+{% endblock %}

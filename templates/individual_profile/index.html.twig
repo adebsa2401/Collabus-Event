@@ -22,7 +22,6 @@
 												<th>Nom</th>
 												<th>Prénoms</th>
 												<th>Email</th>
-												<th>Collaborations</th>
 												<th>Verifié</th>
 												<th>actions</th>
 											</tr>
@@ -34,7 +33,6 @@
 													<td>{{ individual_profile.lastName }}</td>
 													<td>{{ individual_profile.firstName }}</td>
 													<td>{{ individual_profile.user.email }}</td>
-													<td>{{ individual_profile.collaborationCompanies|length }}</td>
 													<td>{{ individual_profile.user.isVerified ? 'Oui' : 'Non' }}</td>
 													<td>
 														<a href="{{ path('app_individual_profile_show', {'id': individual_profile.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">

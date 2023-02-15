@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\CompanyProfile;
+use App\Entity\IndividualProfile;
 use App\Entity\User;
+use App\Form\CompanyAddCollaboratorType;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\IndividualProfileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +49,30 @@ class CompanyController extends AbstractController
         }
 
         return $this->renderForm('company/new.html.twig', [
+            'company' => $company,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/add-collaborators', name: 'app_company_add_collaborators', methods: ['GET', 'POST'])]
+    public function addCollaborators(Request $request, Company $company, CompanyRepository $companyRepository, IndividualProfileRepository $individualProfileRepository): Response
+    {
+        $form = $this->createForm(CompanyAddCollaboratorType::class, null, [
+            'individualProfiles' => array_filter(
+                $individualProfileRepository->findAll(),
+                fn (IndividualProfile $individualProfile) => !in_array($individualProfile, $company->getCollaborators()->toArray())
+            ),
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->get('collaborators')->getData()->map(fn (IndividualProfile $individualProfile) => $company->addCollaborator($individualProfile));
+            $companyRepository->save($company, true);
+
+            return $this->redirectToRoute('app_company_show', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('company/add_collaborators.html.twig', [
             'company' => $company,
             'form' => $form,
         ]);
