@@ -2,38 +2,39 @@
 
 namespace App\Form;
 
-use App\Entity\Company;
 use App\Entity\IndividualProfile;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompanyAddCollaboratorType extends AbstractType
+class ParticipateEventCompanyProfileType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('collaborators', EntityType::class, [
+            ->add('participants', EntityType::class, [
                 'class' => IndividualProfile::class,
-                'choices' => $options['individualProfiles'],
+                'choices' => $options['collaborators'],
                 'choice_label' => function (IndividualProfile $individualProfile) {
                     return "{$individualProfile->getFirstName()} {$individualProfile->getLastName()} ({$individualProfile->getUser()->getEmail()}))";
                 },
+                'group_by' => function (IndividualProfile $individualProfile) {
+                    return $individualProfile->getCompany()->getName();
+                },
                 'multiple' => true,
                 'expanded' => false,
-                'label' => 'Collaborateurs',
                 'mapped' => false,
             ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // 'data_class' => Company::class,
+            // 'data_class' => ParticipateEventCompanyProfile::class,
         ]);
 
-        $resolver->setRequired('individualProfiles');
+        $resolver->setRequired('collaborators');
     }
 }

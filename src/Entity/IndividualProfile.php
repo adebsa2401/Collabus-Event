@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IndividualProfileRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IndividualProfileRepository::class)]
@@ -25,6 +27,14 @@ class IndividualProfile
 
     #[ORM\ManyToOne(inversedBy: 'collaborators')]
     private ?Company $company = null;
+
+    #[ORM\OneToMany(mappedBy: 'participant', targetEntity: EventParticipationRequest::class, orphanRemoval: true)]
+    private Collection $eventParticipationRequests;
+
+    public function __construct()
+    {
+        $this->eventParticipationRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +85,36 @@ class IndividualProfile
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventParticipationRequest>
+     */
+    public function getEventParticipationRequests(): Collection
+    {
+        return $this->eventParticipationRequests;
+    }
+
+    public function addEventParticipationRequest(EventParticipationRequest $eventParticipationRequest): self
+    {
+        if (!$this->eventParticipationRequests->contains($eventParticipationRequest)) {
+            $this->eventParticipationRequests->add($eventParticipationRequest);
+            $eventParticipationRequest->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventParticipationRequest(EventParticipationRequest $eventParticipationRequest): self
+    {
+        if ($this->eventParticipationRequests->removeElement($eventParticipationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($eventParticipationRequest->getParticipant() === $this) {
+                $eventParticipationRequest->setParticipant(null);
+            }
+        }
 
         return $this;
     }

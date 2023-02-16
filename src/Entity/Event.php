@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -29,6 +31,14 @@ class Event
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $endedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventParticipationRequest::class, orphanRemoval: true)]
+    private Collection $participationRequests;
+
+    public function __construct()
+    {
+        $this->participationRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +101,36 @@ class Event
     public function setEndedAt(?\DateTimeImmutable $endedAt): self
     {
         $this->endedAt = $endedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventParticipationRequest>
+     */
+    public function getParticipationRequests(): Collection
+    {
+        return $this->participationRequests;
+    }
+
+    public function addParticipationRequest(EventParticipationRequest $participationRequest): self
+    {
+        if (!$this->participationRequests->contains($participationRequest)) {
+            $this->participationRequests->add($participationRequest);
+            $participationRequest->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationRequest(EventParticipationRequest $participationRequest): self
+    {
+        if ($this->participationRequests->removeElement($participationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($participationRequest->getEvent() === $this) {
+                $participationRequest->setEvent(null);
+            }
+        }
 
         return $this;
     }

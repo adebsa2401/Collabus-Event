@@ -66,7 +66,7 @@ class PlaceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_place_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_place_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Place $place, PlaceRepository $placeRepository): Response
     {
         $isGet = $request->isMethod('GET');

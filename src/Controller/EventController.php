@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\EventParticipationRequest;
 use App\Form\EventType;
+use App\Form\ParticipateEventCompanyProfileType;
+use App\Repository\EventParticipationRequestRepository;
 use App\Repository\EventRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,6 +40,38 @@ class EventController extends AbstractController
         }
 
         return $this->renderForm('event/new.html.twig', [
+            'event' => $event,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/participate', name: 'app_event_participate', methods: ['GET', 'POST'])]
+    public function participateEventCompanyProfile(Request $request, Event $event, EventRepository $eventRepository, EventParticipationRequestRepository $eventParticipationRequestRepository): Response
+    {
+        $collaborators = [];
+        foreach ($this->getUser()->getCompanyProfile()->getCompanies() as $company) {
+            $collaborators = array_merge($collaborators, $company->getCollaborators()->toArray());
+        }
+        $form = $this->createForm(ParticipateEventCompanyProfileType::class, null, [
+            'collaborators' => $collaborators,
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($form->get('participants')->getData() as $participant) {
+                $request = (new EventParticipationRequest())
+                    ->setEvent($event)
+                    ->setParticipant($participant)
+                    ->setCreatedBy($this->getUser())
+                    ->setStatus(EventParticipationRequest::STATUS_PENDING)
+                ;
+                $eventParticipationRequestRepository->save($request, true);
+            }
+
+            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('event/participate.html.twig', [
             'event' => $event,
             'form' => $form,
         ]);

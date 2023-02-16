@@ -40,6 +40,9 @@
 														<a href="{{ path('app_event_show', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
 															<i class="fa fa-eye text-info"></i>
 														</a>
+														<a href="{{ path('app_event_participate', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Participer">
+															<i class="fa fa-user-plus text-primary"></i>
+														</a>
 													</td>
 												</tr>
 											{% endfor %}

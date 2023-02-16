@@ -18,7 +18,7 @@
                 class="icon icon-app-store"></i><span class="nav-text">Evènements</span></a>
         <ul aria-expanded="false">
             <li><a href="{{ path('app_event_index') }}">Tous les évènements</a></li>
-            <li><a href="#">Mes évènements</a></li>
+            <li><a href="{{ path('app_event_participation_request_index_by_company_profile') }}">Mes Requêtes</a></li>
         </ul>
     </li>
 {% endblock %}
