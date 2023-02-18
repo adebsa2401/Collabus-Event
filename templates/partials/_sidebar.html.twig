@@ -1,8 +1,7 @@
-<div class="quixnav">
-    <div class="quixnav-scroll">
-        <ul class="metismenu" id="menu">
-            <li class="nav-label first">{% block title %}Dashboard{% endblock %}</li>
-            {% block menu %}{% endblock %}
-        </ul>
-    </div>
-</div>
+{% if is_granted('ROLE_ADMIN') %}
+    {% include "partials/_sidebar_admin.html.twig" %}
+{% elseif is_granted('ROLE_INDIVIDUAL') %}
+    {% include "partials/_sidebar_individual.html.twig" %}
+{% elseif is_granted('ROLE_COMPANY') %}
+    {% include "partials/_sidebar_company.html.twig" %}
+{% endif %}

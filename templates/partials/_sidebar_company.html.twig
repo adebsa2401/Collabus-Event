@@ -1,24 +1,53 @@
-{% extends "partials/_sidebar.html.twig" %}
-
-{% block title %}Dashboard (Entreprise){% endblock %}
-
-{% block menu %}
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-single-04"></i><span class="nav-text">Entreprises</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_company_index') }}">Toutes les entreprises</a></li>
-            <li><a href="{{ path('app_company_by_company_profile_index') }}">Mes entreprises</a></li>
-            <li><a href="{{ path('app_company_new') }}">Ajouter une entreprise</a></li>
-        </ul>
-    </li>
-    <li><a href="{{ path('app_company_collaborators_index') }}"><i
-                class="icon icon-app-store"></i><span class="nav-text">Collaborateurs</span></a>
-    </li>
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-app-store"></i><span class="nav-text">Evènements</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_event_index') }}">Tous les évènements</a></li>
-            <li><a href="{{ path('app_event_participation_request_index_by_company_profile') }}">Mes Requêtes</a></li>
-        </ul>
-    </li>
-{% endblock %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_dashboard') }}">
+				<i class="icon-grid menu-icon"></i>
+				<span class="menu-title">Dashboard (Entreprise)</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+				<i class="icon-layout menu-icon"></i>
+				<span class="menu-title">Entreprises</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="ui-basic">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_company_index') }}">Toutes les entreprises</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_company_by_company_profile_index') }}">Mes entreprises</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_company_new') }}">Ajouter une entreprise</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_company_collaborators_index') }}">
+				<i class="icon-columns menu-icon"></i>
+				<span class="menu-title">Collaborateurs</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+				<i class="icon-bar-graph menu-icon"></i>
+				<span class="menu-title">Evènements</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="charts">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_index') }}">Tous les évènements</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_participation_request_index_by_company_profile') }}">Mes Requêtes</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</nav>

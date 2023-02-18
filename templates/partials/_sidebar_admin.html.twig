@@ -1,41 +1,95 @@
-{% extends "partials/_sidebar.html.twig" %}
-
-{% block title %}Dashboard (Admin){% endblock %}
-
-{% block menu %}
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-single-04"></i><span class="nav-text">Utilisateurs</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_individual_profile_index') }}">Particuliers</a></li>
-            <li><a href="{{ path('app_company_profile_index') }}">Entreprises</a></li>
-        </ul>
-    </li>
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-app-store"></i><span class="nav-text">Secteurs d'activité</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_activity_area_index') }}">Tous les secteurs d'activité</a></li>
-            <li><a href="{{ path('app_activity_area_new') }}">Ajouter un secteur d'activité</a></li>
-        </ul>
-    </li>
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-app-store"></i><span class="nav-text">Points de rencontre</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_place_index') }}">Tous les points de rencontre</a></li>
-            <li><a href="{{ path('app_place_new') }}">Ajouter un point de rencontre</a></li>
-        </ul>
-    </li>
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-app-store"></i><span class="nav-text">Types d'évènement</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_event_type_index') }}">Tous les types d'évènement</a></li>
-            <li><a href="{{ path('app_event_type_new') }}">Ajouter un type d'évènement</a></li>
-        </ul>
-    </li>
-    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-app-store"></i><span class="nav-text">Evènements</span></a>
-        <ul aria-expanded="false">
-            <li><a href="{{ path('app_event_index') }}">Tous les évènements</a></li>
-            <li><a href="{{ path('app_event_new') }}">Ajouter un évènement</a></li>
-        </ul>
-    </li>
-{% endblock %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('app_dashboard') }}">
+				<i class="icon-grid menu-icon"></i>
+				<span class="menu-title">Dashboard (Admin)</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+				<i class="icon-layout menu-icon"></i>
+				<span class="menu-title">Utilisateurs</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="ui-basic">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_individual_profile_index') }}">Particuliers</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_company_profile_index') }}">Entreprises</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+				<i class="icon-columns menu-icon"></i>
+				<span class="menu-title">Secteurs d'activité</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="form-elements">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_activity_area_index') }}">Tous les secteurs d'activité</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_activity_area_new') }}">Ajouter un secteur d'activité</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+				<i class="icon-bar-graph menu-icon"></i>
+				<span class="menu-title">Points de rencontre</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="charts">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_place_index') }}">Tous les points de rencontre</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_place_new') }}">Ajouter un point de rencontre</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+				<i class="icon-grid-2 menu-icon"></i>
+				<span class="menu-title">Types d'évènement</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="tables">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_type_index') }}">Tous les types d'évènement</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_type_new') }}">Ajouter un type d'évènement</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+				<i class="icon-contract menu-icon"></i>
+				<span class="menu-title">Evènements</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="icons">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_index') }}">Tous les évènements</a>
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" href="{{ path('app_event_new') }}">Ajouter un évènements</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</nav>

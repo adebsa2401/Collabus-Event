@@ -1,75 +1,77 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Collabus Events{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-        <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.carousel.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/css/owl.theme.default.min.css') }}">
-        <link href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
-        <!-- Datatable -->
-        <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<html lang="en">
 
-        {% block stylesheets %}
-            {# {{ encore_entry_link_tags('app') }} #}
-        {% endblock %}
-    </head>
-    <body>
-        {{ include('partials/_preloader.html.twig') }}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{% block title %}CCI Events{% endblock %}</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
 
-        <div id="main-wrapper">
-            {{ include('partials/_nav_header.html.twig') }}
-
-            {% block header %}
-                {{ include('partials/_header.html.twig') }}
-            {% endblock %}
-
-            {% block sidebar %}
-                {{ include('partials/_sidebar.html.twig') }}
-            {% endblock %}
-            
-            {% block body %}{% endblock %}
-
-            {{ include('partials/_footer.html.twig') }}
+  {% block stylesheets %}
+    {# {{ encore_entry_link_tags('app') }} #}
+{% endblock %}
+</head>
+<body>
+  <div class="container-scroller">
+    {{ include('partials/_navbar.html.twig') }}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      {{ include('partials/_sidebar.html.twig') }}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {% block body %}{% endblock %}
         </div>
+        <!-- content-wrapper ends -->
+        {{ include('partials/_footer.html.twig') }}
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 
-        <!-- Required vendors -->
-        <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-        <script src="{{ asset('js/quixnav-init.js') }}"></script>
-        <script src="{{ asset('js/custom.min.js') }}"></script>
+  <!-- plugins:js -->
+  <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+  <script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
+  <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+  <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
 
-        <!-- Vectormap -->
-        <script src="{{ asset('vendor/raphael/raphael.min.js') }}"></script>
-        <script src="{{ asset('vendor/morris/morris.min.js') }}"></script>
-        <script src="{{ asset('vendor/circle-progress/circle-progress.min.js') }}"></script>
-        <script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
-        <script src="{{ asset('vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{{ asset('js/off-canvas.js') }}"></script>
+  <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('js/template.js') }}"></script>
+  <script src="{{ asset('js/settings.js') }}"></script>
+  <script src="{{ asset('js/todolist.js') }}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
+  <!-- End custom js for this page-->
 
-        <!--  flot-chart js -->
-        <script src="{{ asset('vendor/flot/jquery.flot.js') }}"></script>
-        <script src="{{ asset('vendor/flot/jquery.flot.resize.js') }}"></script>
+  {% block javascripts %}
+    {# {{ encore_entry_script_tags('app') }} #}
+{% endblock %}
+</body>
 
-        <!-- Owl Carousel -->
-        <script src="{{ asset('vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
-
-        <!-- Counter Up -->
-        <script src="{{ asset('vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-        <script src="{{ asset('vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-        <script src="{{ asset('vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
-        <script src="{{ asset('js/dashboard/dashboard-1.js') }}"></script>
-
-        <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
-        <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
-
-        <!-- Datatable -->
-        <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
-
-        {% block javascripts %}
-            {# {{ encore_entry_script_tags('app') }} #}
-        {% endblock %}
-    </body>
 </html>
