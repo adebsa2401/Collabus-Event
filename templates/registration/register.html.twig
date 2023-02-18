@@ -1,91 +1,83 @@
 {% extends 'anonym_base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <div class="authincation h-100">
-        <div class="container-fluid h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-                                <div class="auth-form">
-                                    <h4 class="text-center mb-4">Register</h4>
-                                    {% for error in app.flashes('error') %}
-                                        <div class="alert alert-danger"> {{ error }}</div>
-                                    {% endfor %}
+	<div class="auth-form-light text-left py-5 px-4 px-sm-5">
+		<div class="brand-logo">
+			<img src="{{ asset('images/logo.svg') }}" alt="logo">
+		</div>
+		<h4>New here?</h4>
+		<h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+		{% for error in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ error }}</div>
+		{% endfor %}
 
-                                    {{ form_start(form) }}
-                                        <div class="form-group">
-                                            <label><strong>Email</strong></label>
-                                            {{ form_widget(form.email, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		{{ form_start(form) }}
+		<div class="form-group">
+			{{ form_widget(form.email, {"attr": {"class": "form-control form-control-lg", "placeholder": "Email"}}) }}
+		</div>
 
-                                        <div class="form-group">
-                                            <label><strong>Profile</strong></label>
-                                            {{ form_widget(form.profile, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group">
+			{{ form_widget(form.profile, {"attr": {"class": "form-control form-control-lg"}}) }}
+		</div>
 
-                                        <div class="form-group user-profile-info individual-info">
-                                            <label><strong>Nom</strong></label>
-                                            {{ form_widget(form.individualProfile.lastName, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group user-profile-info individual-info">
+			{{ form_widget(form.individualProfile.lastName, {"attr": {"class": "form-control form-control-lg", "placeholder": "Nom"}}) }}
+		</div>
 
-                                        <div class="form-group user-profile-info individual-info">
-                                            <label><strong>Prénoms</strong></label>
-                                            {{ form_widget(form.individualProfile.firstName, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group user-profile-info individual-info">
+			{{ form_widget(form.individualProfile.firstName, {"attr": {"class": "form-control form-control-lg", "placeholder": "Prénoms"}}) }}
+		</div>
 
-                                        <div class="form-group user-profile-info company-info" style="display: none">
-                                            <label><strong>Nom de l'entreprise</strong></label>
-                                            {{ form_widget(form.companyProfile.name, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group user-profile-info company-info" style="display: none">
+			{{ form_widget(form.companyProfile.name, {"attr": {"class": "form-control form-control-lg", "placeholder": "Nom de l'entreprise"}}) }}
+		</div>
 
-                                        <div class="form-group">
-                                            <label><strong>Mot de passe</strong></label>
-                                            {{ form_widget(form.plainPassword.first, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group">
+			{{ form_widget(form.plainPassword.first, {"attr": {"class": "form-control form-control-lg", "placeholder": "Mot de passe"}}) }}
+		</div>
 
-                                        <div class="form-group">
-                                            <label><strong>Confirmer mot de passe</strong></label>
-                                            {{ form_widget(form.plainPassword.second, {"attr": {"class": "form-control"}}) }}
-                                        </div>
+		<div class="form-group">
+			{{ form_widget(form.plainPassword.second, {"attr": {"class": "form-control form-control-lg", "placeholder": "Confirmer mot de passe"}}) }}
+		</div>
 
-                                        <div class="form-group">
-                                            {{ form_widget(form.agreeTerms) }}
-                                            <label><strong>Agree terms</strong></label>
-                                        </div>
+		<div class="mb-4">
+			<div class="form-check">
+				<label class="form-check-label text-muted">
+					{{ form_widget(form.agreeTerms, {"class": "form-check-input"}) }}
 
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Register</button>
-                                        </div>
-                                    {{ form_end(form) }}
-                                    <div class="new-account mt-3">
-                                        <p>Do you have an account? <a class="text-primary" href="{{ path('app_login') }}">Sign in</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					I agree to all Terms & Conditions
+				</label>
+			</div>
+		</div>
+		<div class="mt-3">
+			<button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Register</button>
+		</div>
+		<div class="text-center mt-4 font-weight-light">
+			Already have an account?
+			<a href="{{ path('app_login') }}" class="text-primary">Login</a>
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        $(document).ready(function() {
-            $('#registration_form_profile').on('change', function() {
-                $('.user-profile-info').hide();
-                
-                if ($(this).val() == 'individual') {
-                    $('.individual-info').show();
-                } else if ($(this).val() == 'company') {
-                    $('.company-info').show();
-                }
-            });
-        });
-    </script>
+	<script>
+		$(document).ready(function () {
+$('#registration_form_profile').on('change', function () {
+$('.user-profile-info').hide();
+
+if ($(this).val() == 'individual') {
+$('.individual-info').show();
+} else if ($(this).val() == 'company') {
+$('.company-info').show();
+}
+});
+});
+	</script>
 {% endblock %}
