@@ -35,6 +35,9 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventParticipationRequest::class, orphanRemoval: true)]
     private Collection $participationRequests;
 
+    #[ORM\Column(length: 255)]
+    private ?string $qrCode = null;
+
     public function __construct()
     {
         $this->participationRequests = new ArrayCollection();
@@ -131,6 +134,18 @@ class Event
                 $participationRequest->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQrCode(): ?string
+    {
+        return $this->qrCode;
+    }
+
+    public function setQrCode(string $qrCode): self
+    {
+        $this->qrCode = $qrCode;
 
         return $this;
     }
