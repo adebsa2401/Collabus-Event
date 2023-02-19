@@ -1,80 +1,66 @@
-{% extends "company_dashboard.html.twig" %}
+{% extends "auth_base.html.twig" %}
 
 {% block body %}
-	<div class="content-body">
-		<div class="container-fluid">
-			{{ include('partials/_page_title.html.twig', {'titles': {'Mes Requêtes': ''}}) }}
-			<!-- row -->
-
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Requêtes</h4>
-						</div>
-						<div class="card-body">
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-title">Mes Requêtes</p>
+					<div class="row">
+						<div class="col-12">
 							<div class="table-responsive">
-								<table id="example" class="display" style="min-width: 845px">
-									{% if event_participation_requests|length > 0 %}
-										<thead>
+								<table id="example" class="display expandable-table" style="width: 100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Participant</th>
+											<th>Email</th>
+											<th>Evènement</th>
+											<th>Créé par</th>
+											<th>Créé le</th>
+											<th>Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for event_participation_request in event_participation_requests %}
 											<tr>
-												<th>#</th>
-												<th>Participant</th>
-												<th>Email</th>
-												<th>Evènement</th>
-												<th>Créé par</th>
-												<th>Créé le</th>
-												<th>Status</th>
-												<th>actions</th>
+												<td>{{ loop.index }}</td>
+												<td>{{ event_participation_request.participant.user.fullName }}</td>
+												<td>{{ event_participation_request.participant.user.email }}</td>
+												<td>{{ event_participation_request.event.name }}</td>
+												<td>{{ event_participation_request.createdBy.fullName }}</td>
+												<td>{{ event_participation_request.createdAt ? event_participation_request.createdAt|date('Y/m/d h:i:s') : '' }}</td>
+												<td class="font-weight-medium">
+													{% if event_participation_request.status|lower == 'pending' %}
+														<span class="badge light badge-warning">En Attente</span>
+													{% elseif event_participation_request.status|lower == 'accepted' %}
+														<span class="badge light badge-success">Accepté</span>
+													{% elseif event_participation_request.status|lower == 'rejected' %}
+														<span class="badge light badge-danger">Rejeté</span>
+													{% endif %}
+												</td>
+												<td>
+													<a href="{{ path('app_event_participation_request_show', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+														<i class="fa fa-eye text-info"></i>
+													</a>
+                          <a href="{{ path('app_event_participation_request_delete', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
+														<i class="mdi mdi-delete text-danger"></i>
+													</a>
+												</td>
 											</tr>
-										</thead>
-										<tbody>
-											{% for event_participation_request in event_participation_requests %}
-												<tr>
-													<td>{{ loop.index }}</td>
-													<td>{{ event_participation_request.participant.user.fullName }}</td>
-													<td>{{ event_participation_request.participant.user.email }}</td>
-													<td>{{ event_participation_request.event.name }}</td>
-													<td>{{ event_participation_request.createdBy.fullName }}</td>
-													<td>{{ event_participation_request.createdAt ? event_participation_request.createdAt|date('Y/m/d h:i:s') : '' }}</td>
-													<td>
-                                                        {% if event_participation_request.status|lower == 'pending' %}
-                                                            <span class="badge light badge-warning">En Attente</span>
-                                                        {% elseif event_participation_request.status|lower == 'accepted' %}
-                                                            <span class="badge light badge-success">Accepté</span>
-                                                        {% elseif event_participation_request.status|lower == 'rejected' %}
-                                                            <span class="badge light badge-danger">Rejeté</span>
-                                                        {% endif %}
-                                                    </td>
-													<td>
-														<a href="{{ path('app_event_participation_request_show', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-															<i class="fa fa-eye text-info"></i>
-														</a>
-														<a data-toggle="modal" data-target="#deletePopup">
-                                                            <i class="fa fa-trash text-danger"></i>
-                                                        </a>
-                                                        {{ include('partials/_delete_popup.html.twig', {'action': path('app_event_participation_request_delete', {'id': event_participation_request.id})}) }}
-													</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									{% else %}
-										Aucune requête n'a été trouvée
-									{% endif %}
+										{% else %}
+											<tr class="odd">
+												<td valign="top" colspan="8" class="dataTables_empty">Aucune requête n'a été trouvée</td>
+											</tr>
+										{% endfor %}
+									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- #/ row -->
 		</div>
 	</div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-	$('#confirmButton').click(function () {
-window.location.href = $(this).attr('href');
-});
-</script {% endblock %}

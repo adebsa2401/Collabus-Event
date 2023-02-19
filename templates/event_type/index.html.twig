@@ -1,75 +1,57 @@
-{% extends "admin_dashboard.html.twig" %}
+{% extends "auth_base.html.twig" %}
 
 {% block body %}
-	<div class="content-body">
-		<div class="container-fluid">
-			{{ include('partials/_page_title.html.twig', {'titles': {'Type Evenements': ''}}) }}
-			<!-- row -->
-
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h4 class="card-title">Type Evenements</h4>
-							<a href="{{ path('app_event_type_new') }}" class="btn btn-primary">Ajouter
-								<span class="btn-icon-right">
-									<i class="fa fa-plus"></i>
-								</span>
-							</a>
-						</div>
-						<div class="card-body">
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-title">Types d'évènements</p>
+					<a href="{{ path('app_event_type_new') }}" class="btn btn-primary btn-icon-text">
+						<i class="btn-icon-prepend ti-plus"></i>
+						Ajouter
+					</a>
+					<div class="row">
+						<div class="col-12">
 							<div class="table-responsive">
-								<table id="example" class="display" style="min-width: 845px">
-									{% if event_types|length > 0 %}
-										<thead>
+								<table id="example" class="display expandable-table" style="width: 100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Name</th>
+											<th>Evènements</th>
+											<th>actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for event_type in event_types %}
 											<tr>
-												<th>#</th>
-												<th>Name</th>
-												<th>Evènements</th>
-												<th>actions</th>
+												<td>{{ loop.index }}</td>
+												<td>{{ event_type.name }}</td>
+												<td>{{ event_type.events|length }}</td>
+												<td>
+													<a href="{{ path('app_event_type_show', {'id': event_type.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+														<i class="fa fa-eye text-info"></i>
+													</a>
+													<a href="{{ path('app_event_type_edit', {'id': event_type.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier">
+														<i class="fa fa-edit text-success"></i>
+													</a>
+													<a href="{{ path('app_event_type_delete', {'id': event_type.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
+														<i class="mdi mdi-delete text-danger"></i>
+													</a>
+												</td>
 											</tr>
-										</thead>
-										<tbody>
-											{% for event_type in event_types %}
-												<tr>
-													<td>{{ loop.index }}</td>
-													<td>{{ event_type.name }}</td>
-													<td>{{ event_type.events|length }}</td>
-													<td>
-
-														<a href="{{ path('app_event_type_show', {'id': event_type.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-															<i class="fa fa-eye text-info"></i>
-														</a>
-														<a href="{{ path('app_event_type_edit', {'id': event_type.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-															<i class="fa fa-edit text-success"></i>
-														</a>
-
-														<a data-toggle="modal" data-target="#deletePopup">
-															<i class="fa fa-window-close text-danger"></i>
-														</a>
-
-														{{ include('partials/_delete_popup.html.twig', {'action': path('app_event_type_delete', {'id': event_type.id})}) }}
-													</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									{% else %}
-										Aucun type d'evenement n'a été trouvée
-									{% endif %}
+										{% else %}
+											<tr class="odd">
+												<td valign="top" colspan="8" class="dataTables_empty">Aucun type d'evenement n'a été trouvé</td>
+											</tr>
+										{% endfor %}
+									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- #/ row -->
 		</div>
 	</div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-	$('#confirmButton').click(function () {
-window.location.href = $(this).attr('href');
-});
-</script {% endblock %}

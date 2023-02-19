@@ -1,39 +1,39 @@
-<div class="content-body">
-    <div class="container-fluid">
-        {{ include('partials/_page_title.html.twig', {'titles': {'Points de rencontre': path('app_place_index'), 'Ajouter un point de rencontre': ''}}) }}
-        <!-- row -->
-        <div class="row">
-            <div class="col-xl-6 col-xxl-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Ajouter un point de rencontre</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-form">
-                            {{ form_start(form) }}
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'form-label'}}) }}  
-                                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom du point de rencontre'}}) }}
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        {{ form_label(form.standCount, 'Places (debout)', {'label_attr': {'class': 'form-label'}}) }}  
-                                        {{ form_widget(form.standCount, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        {{ form_label(form.sitCount, 'Places (assis)', {'label_attr': {'class': 'form-label'}}) }}  
-                                        {{ form_widget(form.sitCount, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-3">{{ submit_label ?? 'Enregistrer' }}</button>
-                            {{ form_end(form) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="col-12 grid-margin">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Points de rencontre</h4>
+			{{ form_start(form, {"attr": {"class": "form-sample"}}) }}
+			<p class="card-description">
+				Ajouter un point de rencontre
+			</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group row">
+						{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom du point de rencontre'}}) }}
+						</div>
+					</div>
         </div>
-        <!-- #/ row --> 
+        <div class="col-md-6">
+					<div class="form-group row">
+						{{ form_label(form.standCount, 'Places (debout)', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(form.standCount, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+        </div>
+        <div class="col-md-6">
+					<div class="form-group row">
+						{{ form_label(form.sitCount, 'Places (assis)', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+						<div class="col-sm-9">
+							{{ form_widget(form.sitCount, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
+      {{ form_end(form) }}
     </div>
+  </div>
 </div>

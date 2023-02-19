@@ -1,5 +1,5 @@
 {% if is_granted('ROLE_ADMIN') %}
-    {% include "company/admin_profile/show.html.twig" %}
+	{% include "company/admin_profile/show.html.twig" %}
 {% elseif is_granted('ROLE_COMPANY') %}
-    {% include "company/company_profile/show.html.twig" %}
+	{% include "company/company_profile/show.html.twig" %}
 {% endif %}

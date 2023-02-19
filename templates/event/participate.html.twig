@@ -1,33 +1,27 @@
-{% extends "company_dashboard.html.twig" %}
+{% extends "auth_base.html.twig" %}
 
 {% block body %}
-    <div class="content-body">
-        <div class="container-fluid">
-            {{ include('partials/_page_title.html.twig', {'titles': {'Evènements': path('app_event_index'), (event.name): path('app_event_show', {'id': event.id}), 'Participer': ''}}) }}
-            <!-- row -->
-            <div class="row">
-                <div class="col-xl-6 col-xxl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Participer à un évènement</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="basic-form">
-                                {{ form_start(form) }}
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            {{ form_label(form.participants, 'Participants', {'label_attr': {'class': 'form-label'}}) }}  
-                                            {{ form_widget(form.participants, {'attr': {'class': 'disabling-options'}}) }}
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mt-3">{{ submit_label ?? 'Enregistrer' }}</button>
-                                {{ form_end(form) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="col-12 grid-margin">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">{{ event.name }}</h4>
+			{{ form_start(form, {"attr": {"class": "form-sample"}}) }}
+			<p class="card-description">
+				Participer à un évènement
+			</p>
+			<div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            {{ form_label(form.participants, 'Participants', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+            <div class="col-sm-9">
+              {{ form_widget(form.participants, {'attr': {'class': 'js-example-basic-multiple w-100'}}) }}
             </div>
-            <!-- #/ row --> 
+          </div>
         </div>
+      </div>
+      <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
+      {{ form_end(form) }}
     </div>
+  </div>
+</div>
 {% endblock %}
