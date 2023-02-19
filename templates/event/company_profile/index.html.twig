@@ -13,31 +13,31 @@
 									<thead>
 										<tr>
 											<th>#</th>
-												<th>Libellé</th>
-												<th>Type</th>
-												<th>Lieu</th>
-												<th>Démarre le</th>
-												<th>Fini le</th>
-												<th>Actions</th>
+											<th>Libellé</th>
+											<th>Type</th>
+											<th>Lieu</th>
+											<th>Démarre le</th>
+											<th>Fini le</th>
+											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for event in events %}
 											<tr>
 												<td>{{ loop.index }}</td>
-													<td>{{ event.name }}</td>
-													<td>{{ event.type.name }}</td>
-													<td>{{ event.place ? event.place.name : '-' }}</td>
-													<td>{{ event.startedAt ? event.startedAt|date('Y/m/d') : '' }}</td>
-													<td>{{ event.endedAt ? event.endedAt|date('Y/m/d') : '' }}</td>
-													<td>
-														<a href="{{ path('app_event_show', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-															<i class="fa fa-eye text-info"></i>
-														</a>
-														<a href="{{ path('app_event_participate', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Participer">
-															<i class="fa fa-user-plus text-primary"></i>
-														</a>
-													</td>
+												<td>{{ event.name }}</td>
+												<td>{{ event.type.name }}</td>
+												<td>{{ event.place ? event.place.name : '-' }}</td>
+												<td>{{ event.startedAt ? event.startedAt|date('Y/m/d') : '' }}</td>
+												<td>{{ event.endedAt ? event.endedAt|date('Y/m/d') : '' }}</td>
+												<td>
+													<a href="{{ path('app_event_show', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+														<i class="mdi mdi-eye text-info"></i>
+													</a>
+													<a href="{{ path('app_event_participate', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Participer">
+														<i class="mdi mdi-account-plus text-primary"></i>
+													</a>
+												</td>
 											</tr>
 										{% else %}
 											<tr class="odd">

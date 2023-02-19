@@ -36,10 +36,10 @@
 												<td>{{ place.events|length }}</td>
 												<td>
 													<a href="{{ path('app_place_show', {'id': place.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
-														<i class="fa fa-eye text-info"></i>
+														<i class="mdi mdi-eye text-info"></i>
 													</a>
 													<a href="{{ path('app_place_edit', {'id': place.id}) }}" data-toggle="tooltip" data-placement="top" title="Modifier">
-														<i class="fa fa-edit text-success"></i>
+														<i class="mdi mdi-pencil text-success"></i>
 													</a>
 													<a href="{{ path('app_place_delete', {'id': place.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
 														<i class="mdi mdi-delete text-danger"></i>

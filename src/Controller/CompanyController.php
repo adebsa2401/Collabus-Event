@@ -72,7 +72,7 @@ class CompanyController extends AbstractController
         $form = $this->createForm(CompanyAddCollaboratorType::class, null, [
             'individualProfiles' => array_filter(
                 $individualProfileRepository->findAll(),
-                fn (IndividualProfile $individualProfile) => !in_array($individualProfile, $company->getCollaborators()->toArray())
+                fn (IndividualProfile $individualProfile) => !$individualProfile->getCompany()
             ),
         ]);
         $form->handleRequest($request);
