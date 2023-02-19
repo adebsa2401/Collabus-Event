@@ -56,4 +56,22 @@ class EventParticipationRequestController extends AbstractController
 
         return $this->redirectToRoute('app_event_participation_request_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/accept', name: 'app_event_participation_request_accept', methods: ['GET', 'POST'])]
+    public function accept(EventParticipationRequest $eventParticipationRequest, EventParticipationRequestRepository $eventParticipationRequestRepository): Response
+    {
+        $eventParticipationRequest->setStatus(EventParticipationRequest::STATUS_ACCEPTED);
+        $eventParticipationRequestRepository->save($eventParticipationRequest, true);
+
+        return $this->redirectToRoute('app_event_show', ['id' => $eventParticipationRequest->getEvent()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/reject', name: 'app_event_participation_request_reject', methods: ['GET', 'POST'])]
+    public function reject(EventParticipationRequest $eventParticipationRequest, EventParticipationRequestRepository $eventParticipationRequestRepository): Response
+    {
+        $eventParticipationRequest->setStatus(EventParticipationRequest::STATUS_REJECTED);
+        $eventParticipationRequestRepository->save($eventParticipationRequest, true);
+
+        return $this->redirectToRoute('app_event_show', ['id' => $eventParticipationRequest->getEvent()->getId()], Response::HTTP_SEE_OTHER);
+    }
 }
