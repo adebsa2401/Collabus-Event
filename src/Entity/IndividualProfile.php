@@ -45,6 +45,11 @@ class IndividualProfile
         return $this->id;
     }
 
+    public function getFullName(): ?string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
     public function getUser(): ?User
     {
         return $this->user;

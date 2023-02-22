@@ -120,4 +120,6 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
     }
+
+//    @TODO: Click on a participant to join (create JoinCompanyRequest entity)
 }

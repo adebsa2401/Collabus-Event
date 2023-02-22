@@ -41,10 +41,14 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventAttendance::class, orphanRemoval: true)]
     private Collection $attendances;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: JoinCompanyRequest::class, orphanRemoval: true)]
+    private Collection $joinCompanyRequests;
+
     public function __construct()
     {
         $this->participationRequests = new ArrayCollection();
         $this->attendances = new ArrayCollection();
+        $this->joinCompanyRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,6 +182,36 @@ class Event
             // set the owning side to null (unless already changed)
             if ($attendance->getEvent() === $this) {
                 $attendance->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, JoinCompanyRequest>
+     */
+    public function getJoinCompanyRequests(): Collection
+    {
+        return $this->joinCompanyRequests;
+    }
+
+    public function addJoinCompanyRequest(JoinCompanyRequest $joinCompanyRequest): self
+    {
+        if (!$this->joinCompanyRequests->contains($joinCompanyRequest)) {
+            $this->joinCompanyRequests->add($joinCompanyRequest);
+            $joinCompanyRequest->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJoinCompanyRequest(JoinCompanyRequest $joinCompanyRequest): self
+    {
+        if ($this->joinCompanyRequests->removeElement($joinCompanyRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($joinCompanyRequest->getEvent() === $this) {
+                $joinCompanyRequest->setEvent(null);
             }
         }
 

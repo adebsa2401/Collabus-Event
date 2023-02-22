@@ -67,6 +67,7 @@ class EventParticipationRequestController extends AbstractController
             ->setParticipant($eventParticipationRequest->getParticipant())
             ->setEvent($eventParticipationRequest->getEvent())
             ->setIsVerified(false)
+            ->setRepresentedCompany($eventParticipationRequest->getCreatedBy()->getCompanyProfile())
         ;
 
         $eventAttendanceRepository->save($attendance, true);

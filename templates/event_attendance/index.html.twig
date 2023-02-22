@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_COMPANY') %}
+    {% include "event_attendance/company_profile/index.html.twig" %}
+{% elseif is_granted('ROLE_INDIVIDUAL') %}
+    {% include "event_attendance/individual_profile/index.html.twig" %}
+{% endif %}

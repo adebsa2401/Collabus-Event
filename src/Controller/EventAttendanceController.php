@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\EventAttendance;
 use App\Repository\EventAttendanceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,6 +48,35 @@ class EventAttendanceController extends AbstractController
 
         return $this->render('event_attendance/check_qr_code.html.twig', [
             'event_attendance' => $eventAttendance,
+        ]);
+    }
+
+    #[Route('/', name: 'app_event_attendance_index', methods: ['GET'])]
+    public function index(EventAttendanceRepository $eventAttendanceRepository): Response
+    {
+        if ($this->isGranted('ROLE_INDIVIDUAL')) {
+            return $this->render('event_attendance/index.html.twig', [
+                'event_attendances' => $eventAttendanceRepository->findBy(['participant' => $this->getUser()->getIndividualProfile()]),
+            ]);
+        } elseif ($this->isGranted('ROLE_COMPANY')) {
+            return $this->render('event_attendance/index.html.twig', [
+                'event_attendances' => $eventAttendanceRepository->findBy(['representedCompany' => $this->getUser()->getCompanyProfile()]),
+            ]);
+        }
+    }
+    #[Route('/', name: 'app_event_attendance_by_individual_profile_index', methods: ['GET'])]
+    public function indexByIndividualProfile(EventAttendanceRepository $eventAttendanceRepository): Response
+    {
+        return $this->render('event_attendance/index.html.twig', [
+            'event_attendances' => $eventAttendanceRepository->findBy(['participant' => $this->getUser()->getIndividualProfile()]),
+        ]);
+    }
+
+    #[Route('/event/{id}', name: 'app_event_attendance_by_company_profile_index', methods: ['GET'])]
+    public function indexByCompanyProfile(EventAttendanceRepository $eventAttendanceRepository, Event $event): Response
+    {
+        return $this->render('event_attendance/index.html.twig', [
+            'event_attendances' => $eventAttendanceRepository->findBy(['event' => $event, 'representedCompany' => $this->getUser()->getCompanyProfile()]),
         ]);
     }
 }

@@ -27,6 +27,9 @@ class EventAttendance
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $isVerifiedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'attendances')]
+    private ?CompanyProfile $representedCompany = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class EventAttendance
     public function setIsVerifiedAt(?\DateTimeImmutable $isVerifiedAt): self
     {
         $this->isVerifiedAt = $isVerifiedAt;
+
+        return $this;
+    }
+
+    public function getRepresentedCompany(): ?CompanyProfile
+    {
+        return $this->representedCompany;
+    }
+
+    public function setRepresentedCompany(?CompanyProfile $representedCompany): self
+    {
+        $this->representedCompany = $representedCompany;
 
         return $this;
     }

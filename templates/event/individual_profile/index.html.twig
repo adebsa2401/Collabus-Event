@@ -1,0 +1,56 @@
+{% extends "auth_base.html.twig" %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-title">Evènements</p>
+					<div class="row">
+						<div class="col-12">
+							<div class="table-responsive">
+								<table id="example" class="display expandable-table" style="width: 100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Libellé</th>
+											<th>Type</th>
+											<th>Lieu</th>
+											<th>Démarre le</th>
+											<th>Fini le</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for event in events %}
+											<tr>
+												<td>{{ loop.index }}</td>
+												<td>{{ event.name }}</td>
+												<td>{{ event.type.name }}</td>
+												<td>{{ event.place ? event.place.name : '-' }}</td>
+												<td>{{ event.startedAt ? event.startedAt|date('Y/m/d') : '' }}</td>
+												<td>{{ event.endedAt ? event.endedAt|date('Y/m/d') : '' }}</td>
+												<td>
+													<a href="{{ path('app_event_show', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Consulter">
+														<i class="mdi mdi-eye text-info"></i>
+													</a>
+													<a href="{{ path('app_event_participate', {'id': event.id}) }}" data-toggle="tooltip" data-placement="top" title="Participer">
+														<i class="mdi mdi-account-plus text-primary"></i>
+													</a>
+												</td>
+											</tr>
+										{% else %}
+											<tr class="odd">
+												<td valign="top" colspan="8" class="dataTables_empty">Aucun evenement n'a été trouvé</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

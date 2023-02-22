@@ -1,0 +1,53 @@
+{% extends 'auth_base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Mes participations à des événements</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Evènement</th>
+                                        <th>Participant</th>
+                                        <th>Email</th>
+                                        <th>Présence vérifiée</th>
+                                        <th>Présent le</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for attendance in event_attendances %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ attendance.event.name }}</td>
+                                            <td>{{ attendance.participant.fullName }}</td>
+                                            <td>{{ attendance.participant.user.email }}</td>
+                                            <td>
+                                                {% if attendance.isVerified %}
+                                                    <span class="badge light badge-success">Oui</span>
+                                                {% else %}
+                                                    <span class="badge light badge-danger">Non</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ attendance.isVerified ? attendance.isVerifiedAt|date('d/m/y H:i') : '-' }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucune participation n'a été trouvée</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

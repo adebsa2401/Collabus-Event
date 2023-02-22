@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         if ($this->getIndividualProfile()) {
-            return $this->getIndividualProfile()->getFirstName() . ' ' . $this->getIndividualProfile()->getLastName();
+            return $this->getIndividualProfile()->getFullName();
         }
 
         if ($this->getCompanyProfile()) {

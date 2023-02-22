@@ -1,0 +1,168 @@
+{% extends "auth_base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Mes Relations</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Entreprise</th>
+                                        <th>Evènement</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for relation in sent_join_company_requests|merge(received_join_company_requests)|filter(r => r.status|lower == 'accepted') %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ relation.requestedTo.name }}</td>
+                                            <td>{{ relation.event.name }}</td>
+                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
+                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucune relation n'a été trouvée</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Requêtes envoyées</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Entreprise</th>
+                                        <th>Evènement</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for relation in sent_join_company_requests %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ relation.requestedTo.name }}</td>
+                                            <td>{{ relation.event.name }}</td>
+                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
+                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                            <td class="font-weight-medium">
+                                                {% if relation.status|lower == 'pending' %}
+                                                    <span class="badge light badge-warning">En Attente</span>
+                                                {% elseif relation.status|lower == 'accepted' %}
+                                                    <span class="badge light badge-success">Accepté</span>
+                                                {% elseif relation.status|lower == 'rejected' %}
+                                                    <span class="badge light badge-danger">Rejeté</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if relation.status|lower == 'pending' %}
+                                                    <a href="{{ path('app_join_company_request_delete', {'id': relation.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
+                                                        <i class="mdi mdi-delete text-danger"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucune relation n'a été trouvée</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Requêtes Reçues</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Entreprise</th>
+                                        <th>Evènement</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for relation in received_join_company_requests %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ relation.requestedBy.name }}</td>
+                                            <td>{{ relation.event.name }}</td>
+                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
+                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                            <td class="font-weight-medium">
+                                                {% if relation.status|lower == 'pending' %}
+                                                    <span class="badge light badge-warning">En Attente</span>
+                                                {% elseif relation.status|lower == 'accepted' %}
+                                                    <span class="badge light badge-success">Accepté</span>
+                                                {% elseif relation.status|lower == 'rejected' %}
+                                                    <span class="badge light badge-danger">Rejeté</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if relation.status|lower == 'pending' %}
+                                                    <a href="{{ path('app_join_company_request_accept', {'id': relation.id}) }}" data-toggle="tooltip" data-placement="top" title="Approuver">
+                                                        <i class="mdi mdi-check text-success"></i>
+                                                    </a>
+                                                    <a href="{{ path('app_join_company_request_reject', {'id': relation.id}) }}" data-toggle="tooltip" data-placement="top" title="Rejeter">
+                                                        <i class="mdi mdi-close text-danger"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucune relation n'a été trouvée</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

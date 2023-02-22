@@ -42,7 +42,7 @@ class EventVoter extends Voter
         }
 
         return match($attribute) {
-            self::CREATE => $this->canCreate($subject, $user),
+            self::CREATE => $this->canCreate($user),
             self::EDIT => $this->canEdit($subject, $user),
             self::VIEW => $this->canView($subject, $user),
             self::DELETE => $this->canDelete($subject, $user),
@@ -50,7 +50,7 @@ class EventVoter extends Voter
         };
     }
 
-    private function canCreate(Event $event, User $user)
+    private function canCreate(User $user)
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }

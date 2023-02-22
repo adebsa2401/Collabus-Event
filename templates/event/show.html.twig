@@ -1,69 +1,7 @@
-{% extends "auth_base.html.twig" %}
-
-{% block body %}
-	<div class="row">
-		<div class="col-md-12 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-title">Requêtes -
-						{{ event.name }}</p>
-					<div class="row">
-						<div class="col-12">
-							<div class="table-responsive">
-								<table id="" class="display expandable-table" style="width: 100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Participant</th>
-											<th>Email</th>
-											<th>Evènement</th>
-											<th>Créé par</th>
-											<th>Créé le</th>
-											<th>Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for event_participation_request in event.participationRequests %}
-											<tr>
-												<td>{{ loop.index }}</td>
-												<td>{{ event_participation_request.participant.user.fullName }}</td>
-												<td>{{ event_participation_request.participant.user.email }}</td>
-												<td>{{ event_participation_request.event.name }}</td>
-												<td>{{ event_participation_request.createdBy.fullName }}</td>
-												<td>{{ event_participation_request.createdAt ? event_participation_request.createdAt|date('Y/m/d h:i:s') : '' }}</td>
-												<td class="font-weight-medium">
-													{% if event_participation_request.status|lower == 'pending' %}
-														<span class="badge light badge-warning">En Attente</span>
-													{% elseif event_participation_request.status|lower == 'accepted' %}
-														<span class="badge light badge-success">Accepté</span>
-													{% elseif event_participation_request.status|lower == 'rejected' %}
-														<span class="badge light badge-danger">Rejeté</span>
-													{% endif %}
-												</td>
-												<td>
-													{% if event_participation_request.status|lower == 'pending' %}
-														<a href="{{ path('app_event_participation_request_accept', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Approuver">
-															<i class="mdi mdi-check text-success"></i>
-														</a>
-														<a href="{{ path('app_event_participation_request_reject', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Rejeter">
-															<i class="mdi mdi-close text-danger"></i>
-														</a>
-													{% endif %}
-												</td>
-											</tr>
-										{% else %}
-											<tr class="odd">
-												<td valign="top" colspan="8" class="dataTables_empty">Aucune requête n'a été trouvée</td>
-											</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-{% endblock %}
+{% if is_granted("ROLE_ADMIN") %}
+	{% include "event/admin_profile/show.html.twig" %}
+{% elseif is_granted("ROLE_INDIVIDUAL") %}
+	{% include "event/individual_profile/show.html.twig" %}
+{% elseif is_granted("ROLE_COMPANY") %}
+	{% include "event/company_profile/show.html.twig" %}
+{% endif %}
