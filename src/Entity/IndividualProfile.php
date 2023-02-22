@@ -31,9 +31,13 @@ class IndividualProfile
     #[ORM\OneToMany(mappedBy: 'participant', targetEntity: EventParticipationRequest::class, orphanRemoval: true)]
     private Collection $eventParticipationRequests;
 
+    #[ORM\OneToMany(mappedBy: 'participant', targetEntity: EventAttendance::class, orphanRemoval: true)]
+    private Collection $eventAttendances;
+
     public function __construct()
     {
         $this->eventParticipationRequests = new ArrayCollection();
+        $this->eventAttendances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,36 @@ class IndividualProfile
             // set the owning side to null (unless already changed)
             if ($eventParticipationRequest->getParticipant() === $this) {
                 $eventParticipationRequest->setParticipant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventAttendance>
+     */
+    public function getEventAttendances(): Collection
+    {
+        return $this->eventAttendances;
+    }
+
+    public function addEventAttendance(EventAttendance $eventAttendance): self
+    {
+        if (!$this->eventAttendances->contains($eventAttendance)) {
+            $this->eventAttendances->add($eventAttendance);
+            $eventAttendance->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventAttendance(EventAttendance $eventAttendance): self
+    {
+        if ($this->eventAttendances->removeElement($eventAttendance)) {
+            // set the owning side to null (unless already changed)
+            if ($eventAttendance->getParticipant() === $this) {
+                $eventAttendance->setParticipant(null);
             }
         }
 

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\EventAttendance;
 use App\Entity\EventParticipationRequest;
+use App\Repository\EventAttendanceRepository;
 use App\Repository\EventParticipationRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,9 +60,16 @@ class EventParticipationRequestController extends AbstractController
     }
 
     #[Route('/{id}/accept', name: 'app_event_participation_request_accept', methods: ['GET', 'POST'])]
-    public function accept(EventParticipationRequest $eventParticipationRequest, EventParticipationRequestRepository $eventParticipationRequestRepository): Response
+    public function accept(EventParticipationRequest $eventParticipationRequest, EventParticipationRequestRepository $eventParticipationRequestRepository, EventAttendanceRepository $eventAttendanceRepository): Response
     {
         $eventParticipationRequest->setStatus(EventParticipationRequest::STATUS_ACCEPTED);
+        $attendance = (new EventAttendance())
+            ->setParticipant($eventParticipationRequest->getParticipant())
+            ->setEvent($eventParticipationRequest->getEvent())
+            ->setIsVerified(false)
+        ;
+
+        $eventAttendanceRepository->save($attendance, true);
         $eventParticipationRequestRepository->save($eventParticipationRequest, true);
 
         return $this->redirectToRoute('app_event_show', ['id' => $eventParticipationRequest->getEvent()->getId()], Response::HTTP_SEE_OTHER);

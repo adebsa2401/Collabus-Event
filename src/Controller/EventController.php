@@ -120,21 +120,4 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/{id}/check-qr-code', name: 'app_event_check_qr_code', methods: ['GET', 'POST'])]
-    public function checkQrCode(Request $request, Event $event, EventRepository $eventRepository): Response
-    {
-        if (!$file = $request->files->get('qr_code')) {
-            $this->addFlash('error', 'Please upload a file');
-            return $this->redirectToRoute('app_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        $qrCode = new QrReader($file->getRealPath());
-        if ($qrCode->text() !== $event->getQrCode()) {
-            $this->addFlash('error', 'QR code is invalid');
-            return $this->redirectToRoute('app_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        // todo: check if user is already checked in
-    }
 }

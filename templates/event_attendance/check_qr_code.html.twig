@@ -1,0 +1,17 @@
+{% extends 'auth_base.html.twig' %}
+
+{% block title %}Vérifier QR Code{% endblock %}
+
+{% block body %}
+    <form id="scanner" class="auth-form-light text-left py-5 px-4 px-sm-5" action="{{ path('app_event_attendance_check_qr_code', {'id': event_attendance.id}) }}" method="post">
+        {% for error in app.flashes('error') %}
+            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                {{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <input type="hidden" name="qr_code" />
+    </form>
+{% endblock %}

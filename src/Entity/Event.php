@@ -38,9 +38,13 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $qrCode = null;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventAttendance::class, orphanRemoval: true)]
+    private Collection $attendances;
+
     public function __construct()
     {
         $this->participationRequests = new ArrayCollection();
+        $this->attendances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,6 +150,36 @@ class Event
     public function setQrCode(string $qrCode): self
     {
         $this->qrCode = $qrCode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventAttendance>
+     */
+    public function getAttendances(): Collection
+    {
+        return $this->attendances;
+    }
+
+    public function addAttendance(EventAttendance $attendance): self
+    {
+        if (!$this->attendances->contains($attendance)) {
+            $this->attendances->add($attendance);
+            $attendance->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendance(EventAttendance $attendance): self
+    {
+        if ($this->attendances->removeElement($attendance)) {
+            // set the owning side to null (unless already changed)
+            if ($attendance->getEvent() === $this) {
+                $attendance->setEvent(null);
+            }
+        }
 
         return $this;
     }

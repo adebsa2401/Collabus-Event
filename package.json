@@ -20,6 +20,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "html5-qrcode": "^2.3.7",
         "jquery": "^3.6.3"
     }
 }
