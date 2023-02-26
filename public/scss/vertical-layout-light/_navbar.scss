@@ -69,7 +69,8 @@
     color: $navbar-menu-color;
     padding-right: 2.375rem;
     padding-left: 2.375rem;
-    width: calc(100% - #{$sidebar-width-lg});
+    //width: calc(100% - #{$sidebar-width-lg});
+    width: 100%;
     height: $navbar-height;
     @media (max-width: 991px) {
       width: calc(100% - 55px);
@@ -390,7 +391,8 @@
 @media (max-width:480px) {
   .navbar {
     .navbar-brand-wrapper {
-      width: 55px;
+      width: 0;
+      height: 0;
       .brand-logo-mini{
         padding-top: 0px;
       }

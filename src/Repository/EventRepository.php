@@ -39,6 +39,20 @@ class EventRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return array<Event> Returns an array of Event objects
+     */
+    public function findUpcomingEvents(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.startedAt > :now')
+            ->setParameter('now', new \DateTimeImmutable())
+            ->orderBy('e.startedAt', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */

@@ -56,6 +56,15 @@ class Event
         return $this->id;
     }
 
+    public function getAttendanceRate(): float
+    {
+        $attendanceRate = 0;
+        foreach ($this->getAttendances() as $attendance) {
+            $attendanceRate += intval($attendance->isIsVerified());
+        }
+        return count($this->getAttendances()) > 0 ? $attendanceRate / count($this->getAttendances()) : 0;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
