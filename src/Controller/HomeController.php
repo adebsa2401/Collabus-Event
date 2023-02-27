@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\EventParticipationRequest;
 use App\Repository\CompanyRepository;
+use App\Repository\EventParticipationRequestRepository;
 use App\Repository\EventRepository;
+use App\Repository\IndividualProfileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function home(EventRepository $eventRepository, CompanyRepository $companyRepository): Response
+    public function home(EventRepository $eventRepository, CompanyRepository $companyRepository, EventParticipationRequestRepository $eventParticipationRequestRepository, IndividualProfileRepository $individualProfileRepository): Response
     {
         $allEvents = $eventRepository->findAll();
         $events = $eventRepository->findUpcomingEvents();
@@ -30,21 +33,20 @@ class HomeController extends AbstractController
         }
         $globalAttendanceRate = $total > 0 ? $globalAttendanceRate / $total : 0;
 
-        // Calculate attendance rate over last 3 events
-        $attendanceRateOverLast3Events = 0;
-        $total = 0;
-        foreach (array_slice($allEvents, -3) as $event) {
-            $attendanceRateOverLast3Events += $event->getAttendances()->count() * $event->getAttendanceRate();
-            $total += $event->getAttendances()->count();
-        }
-        $attendanceRateOverLast3Events = $total > 0 ? $attendanceRateOverLast3Events / $total : 0;
+        // Calculate request approvement rate
+        $totalRequests = array_sum(array_map(fn ($event) => $event->getParticipationRequests()->count(), $allEvents));
+        $totalParticipations = array_sum(array_map(fn ($event) => $event->getAttendances()->count(), $allEvents));
+        $globalAttendanceValidationRate = $totalRequests > 0 ? $totalParticipations / $totalRequests : 0;
 
-        $highestAttendanceRate = 0;
-        $lowestAttendanceRate = 0;
-        if (count($allEvents) > 0) {
-            $highestAttendanceRate = max(array_map(fn ($event) => $event->getAttendanceRate(), $allEvents));
-            $lowestAttendanceRate = min(array_map(fn ($event) => $event->getAttendanceRate(), $allEvents));
-        }
+        // calculate companies interest rate
+        $totalRequestsByCompany = count(array_filter($eventParticipationRequestRepository->findAll(), fn (EventParticipationRequest $request) => $request->getCreatedBy()->getCompanyProfile()));
+        $totalCompany = count($companyRepository->findAll());
+        $companiesInterestRate = $totalCompany > 0 ? $totalRequestsByCompany / $totalCompany : 0;
+
+        // calculate individual profiles interest rate
+        $totalRequestsByIndividual = count(array_filter($eventParticipationRequestRepository->findAll(), fn (EventParticipationRequest $request) => $request->getCreatedBy()->getIndividualProfile()));
+        $totalIndividual = count($individualProfileRepository->findAll());
+        $individualsInterestRate = $totalIndividual > 0 ? $totalRequestsByIndividual / $totalIndividual : 0;
 
         return $this->render('index.html.twig', compact(
             'events',
@@ -52,9 +54,9 @@ class HomeController extends AbstractController
             'companies',
             'activityAreas',
             'globalAttendanceRate',
-            'attendanceRateOverLast3Events',
-            'highestAttendanceRate',
-            'lowestAttendanceRate'
+            'globalAttendanceValidationRate',
+            'companiesInterestRate',
+            'individualsInterestRate'
         ));
     }
 

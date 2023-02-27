@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/company')]
 class CompanyController extends AbstractController
@@ -35,7 +36,7 @@ class CompanyController extends AbstractController
     }
 
     #[Route('/new', name: 'app_company_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CompanyRepository $companyRepository): Response
+    public function new(Request $request, CompanyRepository $companyRepository, SluggerInterface $slugger): Response
     {
         $company = (new Company())
             ->setOwner($this->getUser()->getCompanyProfile());
@@ -43,6 +44,24 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $logo = $form->get('logo')->getData();
+            if ($logo) {
+                $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logo->guessExtension();
+
+                try {
+                    $logo->move(
+                        $this->getParameter('company_logos_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $company->setLogo($newFilename);
+            }
+
             $companyRepository->save($company, true);
 
             return $this->redirectToRoute('app_company_by_company_profile_index', [], Response::HTTP_SEE_OTHER);

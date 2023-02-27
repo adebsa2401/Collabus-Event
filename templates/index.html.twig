@@ -97,9 +97,9 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
-      <h1>Welcome to <span>BizLand</span>
+      <h1>Bienvenue à <span>CCI-Events</span>
       </h1>
-      <h2>We are team of talanted designers making websites with Bootstrap</h2>
+      <h2>La dynamique B2B de la CCI Bénin</h2>
       <div class="d-flex">
         <a href="{{ path('app_login') }}" class="btn-get-started scrollto">Se connecter</a>
         <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2"></i></a>
@@ -208,23 +208,23 @@
 
             <div class="progress">
               {% set globalAttendanceRate = (globalAttendanceRate * 100)|number_format %}
-              <span class="skill">Présence aux évènements <i class="val">{{ globalAttendanceRate }}%</i></span>
+              <span class="skill">Taux de présence <i class="val">{{ globalAttendanceRate }}%</i></span>
               <div class="progress-bar-wrap">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ globalAttendanceRate }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
 
             <div class="progress">
-              {% set attendanceRateOverLast3Events = (attendanceRateOverLast3Events * 100)|number_format %}
-              <span class="skill">Présence aux 3 derniers évènements <i class="val">{{ attendanceRateOverLast3Events }}%</i></span>
+              {% set globalAttendanceValidationRate = (globalAttendanceValidationRate * 100)|number_format %}
+              <span class="skill">Taux de participation <i class="val">{{ globalAttendanceValidationRate }}%</i></span>
               <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{ attendanceRateOverLast3Events }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ globalAttendanceValidationRate }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
 
 {#            <div class="progress">#}
 {#              {% set highestAttendanceRate = (highestAttendanceRate * 100)|number_format %}#}
-{#              <span class="skill">Meilleur taux de participation <i class="val">{{ highestAttendanceRate }}%</i></span>#}
+{#              <span class="skill">Taux d'interessement des entreprises <i class="val">{{ highestAttendanceRate }}%</i></span>#}
 {#              <div class="progress-bar-wrap">#}
 {#                <div class="progress-bar" role="progressbar" aria-valuenow="{{ highestAttendanceRate }}" aria-valuemin="0" aria-valuemax="100"></div>#}
 {#              </div>#}
@@ -235,18 +235,18 @@
           <div class="col-lg-6">
 
             <div class="progress">
-              {% set lowestAttendanceRate = (lowestAttendanceRate * 100)|number_format %}
-              <span class="skill">Plus faible taux de participation <i class="val">{{ lowestAttendanceRate }}%</i></span>
+              {% set individualsInterestRate = (individualsInterestRate * 100)|number_format %}
+              <span class="skill">Taux d'interessement des particuliers <i class="val">{{ individualsInterestRate }}%</i></span>
               <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{ lowestAttendanceRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ individualsInterestRate }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
 
             <div class="progress">
-              {% set highestAttendanceRate = (highestAttendanceRate * 100)|number_format %}
-              <span class="skill">Meilleur taux de participation <i class="val">{{ highestAttendanceRate }}%</i></span>
+              {% set companiesInterestRate = (companiesInterestRate * 100)|number_format %}
+              <span class="skill">Taux d'interessement des entreprises <i class="val">{{ companiesInterestRate }}%</i></span>
               <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{ highestAttendanceRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ companiesInterestRate }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
 
@@ -494,10 +494,9 @@
         </div>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
           {% for company in companies %}
             <div class="col-lg-4 col-md-6 portfolio-item {% for activityArea in company.activityAreas %}filter-{{ activityArea.name|u.snake }} {% endfor %}">
-              <img src="{{ company.logo ?? 'assets/img/portfolio/portfolio-1.jpg' }}" class="img-fluid" alt="{{ company.name }}">
+              <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : 'assets/img/portfolio/portfolio-1.jpg' }}" class="img-fluid" alt="{{ company.name }}">
               <div class="portfolio-info">
                 <h4>{{ company.name }}</h4>
                 <p>{{ company.activityAreas|map(a => a.name)|join(' - ') }}</p>

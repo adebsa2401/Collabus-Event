@@ -1,31 +1,43 @@
 <div class="col-12 grid-margin">
-	<div class="card">
-		<div class="card-body">
-			<h4 class="card-title">Mes Entreprises</h4>
-			{{ form_start(form, {"attr": {"class": "form-sample"}}) }}
-			<p class="card-description">
-				Ajouter une entreprise
-			</p>
-			<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mes Entreprises</h4>
+            {{ form_start(form, {"attr": {"class": "form-sample"}}) }}
+            <p class="card-description">
+                Ajouter une entreprise
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'entreprise'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.activityAreas, 'Secteurs d\'activité', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.activityAreas, {'attr': {'class': 'js-example-basic-multiple w-100'}}) }}
+                        </div>
+                    </div>
+                </div>
 				<div class="col-md-6">
 					<div class="form-group row">
-						{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-						<div class="col-sm-9">
-							{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'entreprise'}}) }}
+						{{ form_label(form.logo, 'Logo', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+						{{ form_widget(form.logo, {'attr': {'class': 'file-upload-default'}}) }}
+						<div class="input-group col-xs-12 col-sm-9 align-items-sm-center">
+							<input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+							<span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                            </span>
 						</div>
 					</div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group row">
-            {{ form_label(form.activityAreas, 'Secteurs d\'activité', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-            <div class="col-sm-9">
-              {{ form_widget(form.activityAreas, {'attr': {'class': 'js-example-basic-multiple w-100'}}) }}
+				</div>
             </div>
-          </div>
+            <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
+            {{ form_end(form) }}
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
-      {{ form_end(form) }}
     </div>
-  </div>
 </div>

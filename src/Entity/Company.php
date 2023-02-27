@@ -28,6 +28,9 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: IndividualProfile::class)]
     private Collection $collaborators;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->activityAreas = new ArrayCollection();
@@ -116,6 +119,18 @@ class Company
                 $collaborator->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }
