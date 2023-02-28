@@ -18,7 +18,7 @@
               <i class="icon-search"></i>
             </span>
           </div>
-          <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+          <input type="text" class="form-control" id="navbar-search-input" placeholder="Rechercher" aria-label="search" aria-describedby="search">
         </div>
       </li>
     </ul>
@@ -78,11 +78,11 @@
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="dropdown-item">
             <i class="ti-settings text-primary"></i>
-            Settings
+            {{ app.user.fullName }}
           </a>
           <a class="dropdown-item" href="{{ path('app_logout') }}">
             <i class="ti-power-off text-primary"></i>
-            Logout
+            Déconnexion
           </a>
         </div>
       </li>
