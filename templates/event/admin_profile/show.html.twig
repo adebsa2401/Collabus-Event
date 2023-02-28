@@ -1,124 +1,135 @@
 {% extends "auth_base.html.twig" %}
 
 {% block body %}
-	<div class="row">
-		<img class="mx-auto mb-3" src="{{ qr_code_path(event.qrCode) }}"/>
-	</div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">{{ event.name }}</p>
+                </div>
+                <img class="mx-auto mb-3" src="{{ qr_code_path(event.qrCode) }}"/>
+            </div>
+        </div>
+    </div>
 
-	<div class="row">
-		<div class="col-md-12 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-title">Requêtes -
-						{{ event.name }}</p>
-					<div class="row">
-						<div class="col-12">
-							<div class="table-responsive">
-								<table id="" class="display expandable-table" style="width: 100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Participant</th>
-											<th>Email</th>
-											<th>Evènement</th>
-											<th>Créé par</th>
-											<th>Créé le</th>
-											<th>Status</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for event_participation_request in event.participationRequests %}
-											<tr>
-												<td>{{ loop.index }}</td>
-												<td>{{ event_participation_request.participant.user.fullName }}</td>
-												<td>{{ event_participation_request.participant.user.email }}</td>
-												<td>{{ event_participation_request.event.name }}</td>
-												<td>{{ event_participation_request.createdBy.fullName }}</td>
-												<td>{{ event_participation_request.createdAt ? event_participation_request.createdAt|date('Y/m/d h:i:s') : '' }}</td>
-												<td class="font-weight-medium">
-													{% if event_participation_request.status|lower == 'pending' %}
-														<span class="badge light badge-warning">En Attente</span>
-													{% elseif event_participation_request.status|lower == 'accepted' %}
-														<span class="badge light badge-success">Accepté</span>
-													{% elseif event_participation_request.status|lower == 'rejected' %}
-														<span class="badge light badge-danger">Rejeté</span>
-													{% endif %}
-												</td>
-												<td>
-													{% if event_participation_request.status|lower == 'pending' %}
-														<a href="{{ path('app_event_participation_request_accept', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Approuver">
-															<i class="mdi mdi-check text-success"></i>
-														</a>
-														<a href="{{ path('app_event_participation_request_reject', {'id': event_participation_request.id}) }}" data-toggle="tooltip" data-placement="top" title="Rejeter">
-															<i class="mdi mdi-close text-danger"></i>
-														</a>
-													{% endif %}
-												</td>
-											</tr>
-										{% else %}
-											<tr class="odd">
-												<td valign="top" colspan="8" class="dataTables_empty">Aucune requête n'a été trouvée</td>
-											</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Requêtes</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Participant</th>
+                                        <th>Email</th>
+                                        <th>Evènement</th>
+                                        <th>Créé par</th>
+                                        <th>Créé le</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for event_participation_request in event.participationRequests %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ event_participation_request.participant.user.fullName }}</td>
+                                            <td>{{ event_participation_request.participant.user.email }}</td>
+                                            <td>{{ event_participation_request.event.name }}</td>
+                                            <td>{{ event_participation_request.createdBy.fullName }}</td>
+                                            <td>{{ event_participation_request.createdAt ? event_participation_request.createdAt|date('Y/m/d h:i:s') : '' }}</td>
+                                            <td class="font-weight-medium">
+                                                {% if event_participation_request.status|lower == 'pending' %}
+                                                    <span class="badge light badge-warning">En Attente</span>
+                                                {% elseif event_participation_request.status|lower == 'accepted' %}
+                                                    <span class="badge light badge-success">Accepté</span>
+                                                {% elseif event_participation_request.status|lower == 'rejected' %}
+                                                    <span class="badge light badge-danger">Rejeté</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if event_participation_request.status|lower == 'pending' %}
+                                                    <a href="{{ path('app_event_participation_request_accept', {'id': event_participation_request.id}) }}"
+                                                       data-toggle="tooltip" data-placement="top" title="Approuver">
+                                                        <i class="mdi mdi-check text-success"></i>
+                                                    </a>
+                                                    <a href="{{ path('app_event_participation_request_reject', {'id': event_participation_request.id}) }}"
+                                                       data-toggle="tooltip" data-placement="top" title="Rejeter">
+                                                        <i class="mdi mdi-close text-danger"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucune requête n'a été
+                                                trouvée
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="row">
-		<div class="col-md-12 grid-margin stretch-card">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-title">Participants -
-						{{ event.name }}</p>
-					<div class="row">
-						<div class="col-12">
-							<div class="table-responsive">
-								<table id="" class="display expandable-table" style="width: 100%">
-									<thead>
-									<tr>
-										<th>#</th>
-										<th>Participant</th>
-										<th>Email</th>
-										<th>Entreprise représentée</th>
-										<th>Présence vérifiée</th>
-										<th>Présent le</th>
-									</tr>
-									</thead>
-									<tbody>
-									{% for attendance in event.attendances %}
-										<tr>
-											<td>{{ loop.index }}</td>
-											<td>{{ attendance.participant.fullName }}</td>
-											<td>{{ attendance.participant.user.email }}</td>
-											<td>{{ attendance.representedCompany.name }}</td>
-											<td>
-												{% if attendance.isVerified %}
-													<span class="badge light badge-success">Oui</span>
-												{% else %}
-													<span class="badge light badge-danger">Non</span>
-												{% endif %}
-											</td>
-											<td>{{ attendance.isVerified ? attendance.isVerifiedAt|date('d/m/y H:i') : '-' }}</td>
-										</tr>
-									{% else %}
-										<tr class="odd">
-											<td valign="top" colspan="8" class="dataTables_empty">Aucun participant n'a été trouvé</td>
-										</tr>
-									{% endfor %}
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Participants</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="" class="display expandable-table" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Participant</th>
+                                        <th>Email</th>
+                                        <th>Entreprise représentée</th>
+                                        <th>Présence vérifiée</th>
+                                        <th>Présent le</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for attendance in event.attendances %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ attendance.participant.fullName }}</td>
+                                            <td>{{ attendance.participant.user.email }}</td>
+                                            <td>{{ attendance.representedCompany.name }}</td>
+                                            <td>
+                                                {% if attendance.isVerified %}
+                                                    <span class="badge light badge-success">Oui</span>
+                                                {% else %}
+                                                    <span class="badge light badge-danger">Non</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ attendance.isVerified ? attendance.isVerifiedAt|date('d/m/y H:i') : '-' }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="odd">
+                                            <td valign="top" colspan="8" class="dataTables_empty">Aucun participant n'a
+                                                été trouvé
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
