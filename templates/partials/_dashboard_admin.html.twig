@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Comptes Entreprise</p>
+                <p class="fs-30 mb-2">{{ companyProfiles|length|number_format }}</p>
+                {#                    <p>10.00% (30 days)</p>#}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Comptes Particulier</p>
+                <p class="fs-30 mb-2">{{ individualProfiles|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Entreprises</p>
+                <p class="fs-30 mb-2">{{ companies|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Secteurs d'Activité</p>
+                <p class="fs-30 mb-2">{{ activityAreas|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Points de rencontre</p>
+                <p class="fs-30 mb-2">{{ places|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Types d'évènement</p>
+                <p class="fs-30 mb-2">{{ eventTypes|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Evènements</p>
+                <p class="fs-30 mb-2">{{ events|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+</div>

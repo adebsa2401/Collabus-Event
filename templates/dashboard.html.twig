@@ -1,5 +1,13 @@
 {% extends "auth_base.html.twig" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}CCI Events - Dashboard{% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+        {% include 'partials/_dashboard_admin.html.twig' %}
+    {% elseif is_granted('ROLE_INDIVDUAL') %}
+        {% include 'partials/_dashboard_individual.html.twig' %}
+    {% elseif is_granted('ROLE_COMPANY') %}
+        {% include 'partials/_dashboard_company.html.twig' %}
+    {% endif %}
+{% endblock %}

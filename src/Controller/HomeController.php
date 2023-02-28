@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\EventParticipationRequest;
+use App\Repository\ActivityAreaRepository;
+use App\Repository\CompanyProfileRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\EventParticipationRequestRepository;
 use App\Repository\EventRepository;
+use App\Repository\EventTypeRepository;
 use App\Repository\IndividualProfileRepository;
+use App\Repository\PlaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,8 +65,24 @@ class HomeController extends AbstractController
     }
 
     #[Route('/dashboard', name: 'app_dashboard')]
-    public function dashboard(): Response
+    public function dashboard(
+        CompanyRepository $companyRepository,
+        EventRepository $eventRepository,
+        CompanyProfileRepository $companyProfileRepository,
+        IndividualProfileRepository $individualProfileRepository,
+        EventTypeRepository $eventTypeRepository,
+        PlaceRepository $placeRepository,
+        ActivityAreaRepository $activityAreaRepository
+    ): Response
     {
-        return $this->render('dashboard.html.twig');
+        return $this->render('dashboard.html.twig', [
+            'companies' => $companyRepository->findAll(),
+            'events' => $eventRepository->findAll(),
+            'companyProfiles' => $companyProfileRepository->findAll(),
+            'individualProfiles' => $individualProfileRepository->findAll(),
+            'eventTypes' => $eventTypeRepository->findAll(),
+            'places' => $placeRepository->findAll(),
+            'activityAreas' => $activityAreaRepository->findAll(),
+        ]);
     }
 }
