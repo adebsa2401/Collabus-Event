@@ -2,10 +2,9 @@
 import {Html5QrcodeScanner} from "html5-qrcode"
 
 function onScanSuccess(decodedText, decodedResult) {
-    const form = document.getElementById("scanner");
+    const form = document.getElementById("scanner-form");
     form.querySelector('input[name="qr_code"]').value = decodedText;
     form.submit();
-    console.log(`Scan result: ${decodedText}`, decodedResult);
 }
 
 function onScanFailure(error) {
