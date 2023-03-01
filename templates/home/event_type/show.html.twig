@@ -1,0 +1,62 @@
+{% extends "home/base.html.twig" %}
+
+{% block body %}
+    <main id="main" data-aos="fade-up">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>{{ eventType.name }}</h2>
+                    <ol>
+                        <li><a href="{{ path('app_home') }}">Home</a></li>
+                        <li>{{ eventType.name }}</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- Breadcrumbs Section -->
+
+        <!-- ======= Pricing Section ======= -->
+        <section id="pricing" class="pricing">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Pricing</h2>
+                    <h3>Check our <span>Pricing</span></h3>
+                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas
+                        atque vitae autem.</p>
+                </div>
+
+                <div class="row">
+
+                    {% for event in eventType.events %}
+                        <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+                            <div class="box">
+                                <span class="advanced">{{ event.type.name }}</span>
+                                <h3>{{ event.name }}</h3>
+                                <h4><sup>{{ event.startedAt|date('d/m/y') }} - {{ event.endedAt|date('d/m/y') }}</sup>
+                                </h4>
+                                <ul>
+                                    <li>{{ event.place.name }}</li>
+                                    <li>{{ event.place.standCount|number_format }} places debout</li>
+                                    <li>{{ event.place.sitCount|number_format }} places assises</li>
+                                    <li>{{ event.participationRequests|length|number_format }} requêtes de
+                                        participation
+                                    </li>
+                                </ul>
+                                <div class="btn-wrap">
+                                    <a href="{{ path('app_event_participate', {'id': event.id}) }}" class="btn-buy">Participer</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section><!-- End Pricing Section -->
+
+    </main><!-- End #main -->
+{% endblock %}
