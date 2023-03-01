@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\EventParticipationRequest;
+use App\Entity\EventType;
 use App\Repository\ActivityAreaRepository;
 use App\Repository\CompanyProfileRepository;
 use App\Repository\CompanyRepository;
@@ -18,7 +19,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function home(EventRepository $eventRepository, CompanyRepository $companyRepository, EventParticipationRequestRepository $eventParticipationRequestRepository, IndividualProfileRepository $individualProfileRepository): Response
+    public function home(
+        EventRepository $eventRepository,
+        CompanyRepository $companyRepository,
+        EventParticipationRequestRepository $eventParticipationRequestRepository,
+        IndividualProfileRepository $individualProfileRepository,
+        EventTypeRepository $eventTypeRepository,
+    ): Response
     {
         $allEvents = $eventRepository->findAll();
         $events = $eventRepository->findUpcomingEvents();
@@ -52,7 +59,9 @@ class HomeController extends AbstractController
         $totalIndividual = count($individualProfileRepository->findAll());
         $individualsInterestRate = $totalIndividual > 0 ? $totalRequestsByIndividual / $totalIndividual : 0;
 
-        return $this->render('index.html.twig', compact(
+        $eventTypes = $eventTypeRepository->findAll();
+
+        return $this->render('home/index.html.twig', compact(
             'events',
             'allEvents',
             'companies',
@@ -60,8 +69,15 @@ class HomeController extends AbstractController
             'globalAttendanceRate',
             'globalAttendanceValidationRate',
             'companiesInterestRate',
-            'individualsInterestRate'
+            'individualsInterestRate',
+            'eventTypes'
         ));
+    }
+
+    #[Route('/public/event-type/{id}', name: 'app_home_event_type_show')]
+    public function eventTypeShow(EventType $eventType): Response
+    {
+        return $this->render('home/event_type/show.html.twig', compact('eventType'));
     }
 
     #[Route('/dashboard', name: 'app_dashboard')]
