@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a57c266-d859-45ce-8d79-395a859dee81" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,6 +169,7 @@
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
     </include_path>
   </component>
   <component name="ProjectId" id="2M2n7z4LDU1YByfTv6cvHTyi7jR" />
@@ -240,6 +242,7 @@
       <workItem from="1677600402319" duration="2284000" />
       <workItem from="1677646771573" duration="9258000" />
       <workItem from="1677675801162" duration="1494000" />
+      <workItem from="1677708660211" duration="131000" />
     </task>
     <servers />
   </component>
