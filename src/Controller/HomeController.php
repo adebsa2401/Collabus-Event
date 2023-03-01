@@ -25,15 +25,17 @@ class HomeController extends AbstractController
         EventParticipationRequestRepository $eventParticipationRequestRepository,
         IndividualProfileRepository $individualProfileRepository,
         EventTypeRepository $eventTypeRepository,
+        ActivityAreaRepository $activityAreaRepository
     ): Response
     {
         $allEvents = $eventRepository->findAll();
         $events = $eventRepository->findUpcomingEvents();
 
         $companies = $companyRepository->findAll();
-        $activityAreas = array_map(fn ($company) => $company->getActivityAreas()->toArray(), $companies);
-        $activityAreas = array_map(fn ($activityArea) => $activityArea->getName(), array_merge(...$activityAreas));
-        $activityAreas = array_unique($activityAreas);
+        $activityAreas = $activityAreaRepository->findAll();
+//        $activityAreas = array_map(fn ($company) => $company->getActivityAreas()->toArray(), $companies);
+//        $activityAreas = array_map(fn ($activityArea) => $activityArea->getName(), array_merge(...$activityAreas));
+//        $activityAreas = array_unique($activityAreas);
 
         // Calculate global attendance rate
         $globalAttendanceRate = 0;
