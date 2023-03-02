@@ -355,7 +355,7 @@
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
               {% for activityArea in activityAreas %}
-                <li data-filter=".filter-{{ activityArea|u.snake }}">{{ activityArea }}</li>
+                <li data-filter=".filter-{{ activityArea.name|u.snake }}">{{ activityArea.name }}</li>
               {% endfor %}
             </ul>
           </div>
