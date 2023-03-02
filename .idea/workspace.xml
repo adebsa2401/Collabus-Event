@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83b747a-8f1c-4b14-a832-fb992c44681d" name="Changes" comment="" />
+    <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/assets/img/hero-bg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/img/hero-bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -216,7 +222,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8a57c266-d859-45ce-8d79-395a859dee81" name="Changes" comment="" />
+      <changelist id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="" />
       <created>1676974381515</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -240,6 +246,9 @@
       <workItem from="1677646771573" duration="9258000" />
       <workItem from="1677675801162" duration="1494000" />
       <workItem from="1677708660211" duration="131000" />
+      <workItem from="1677776619600" duration="886000" />
+      <workItem from="1677778782099" duration="44000" />
+      <workItem from="1677785847454" duration="76000" />
     </task>
     <servers />
   </component>
