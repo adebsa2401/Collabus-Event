@@ -184,8 +184,8 @@
       itemSelector: '.portfolio-item'
     });
 
-    $('#portfolio-flters li').on('click', function() {
-      $("#portfolio-flters li").removeClass('filter-active');
+    $('#portfolio-flters li, .portfolio-flters li').on('click', function() {
+      $("#portfolio-flters li, .portfolio-flters li").removeClass('filter-active');
       $(this).addClass('filter-active');
 
       portfolioIsotope.isotope({
