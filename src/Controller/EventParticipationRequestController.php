@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/event_type-participation-request')]
+#[Route('/event-participation-request')]
 class EventParticipationRequestController extends AbstractController
 {
     #[Route('/', name: 'app_event_participation_request_index', methods: ['GET'])]

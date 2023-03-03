@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/event_type-attendance')]
+#[Route('/event-attendance')]
 class EventAttendanceController extends AbstractController
 {
     #[Route('/{id}/check-qr-code', name: 'app_event_attendance_check_qr_code', methods: ['GET', 'POST'])]
@@ -72,11 +72,11 @@ class EventAttendanceController extends AbstractController
         ]);
     }
 
-    #[Route('/event_type/{id}', name: 'app_event_attendance_by_company_profile_index', methods: ['GET'])]
+    #[Route('/event/{id}', name: 'app_event_attendance_by_company_profile_index', methods: ['GET'])]
     public function indexByCompanyProfile(EventAttendanceRepository $eventAttendanceRepository, Event $event): Response
     {
         return $this->render('event_attendance/index.html.twig', [
-            'event_attendances' => $eventAttendanceRepository->findBy(['event_type' => $event, 'representedCompany' => $this->getUser()->getCompanyProfile()]),
+            'event_attendances' => $eventAttendanceRepository->findBy(['event' => $event, 'representedCompany' => $this->getUser()->getCompanyProfile()]),
         ]);
     }
 }

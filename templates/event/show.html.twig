@@ -1,7 +1,7 @@
 {% if is_granted("ROLE_ADMIN") %}
-	{% include "event_type/admin_profile/show.html.twig" %}
+	{% include "event/admin_profile/show.html.twig" %}
 {% elseif is_granted("ROLE_INDIVIDUAL") %}
-	{% include "event_type/individual_profile/show.html.twig" %}
+	{% include "event/individual_profile/show.html.twig" %}
 {% elseif is_granted("ROLE_COMPANY") %}
-	{% include "event_type/company_profile/show.html.twig" %}
+	{% include "event/company_profile/show.html.twig" %}
 {% endif %}

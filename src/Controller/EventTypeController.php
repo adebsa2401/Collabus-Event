@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/event_type-type')]
+#[Route('/event_type')]
 class EventTypeController extends AbstractController
 {
     #[Route('/', name: 'app_event_type_index', methods: ['GET'])]
@@ -66,7 +66,7 @@ class EventTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_event_type_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_event_type_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, EventType $eventType, EventTypeRepository $eventTypeRepository): Response
     {
         $isGet = $request->isMethod('GET');

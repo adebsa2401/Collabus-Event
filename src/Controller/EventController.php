@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Zxing\QrReader;
 
-#[Route('/event_type')]
+#[Route('/event')]
 class EventController extends AbstractController
 {
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
@@ -42,7 +42,7 @@ class EventController extends AbstractController
         }
 
         return $this->renderForm('event/new.html.twig', [
-            'event_type' => $event,
+            'event' => $event,
             'form' => $form,
         ]);
     }
@@ -74,22 +74,22 @@ class EventController extends AbstractController
         }
 
         return $this->renderForm('event/participate.html.twig', [
-            'event_type' => $event,
+            'event' => $event,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
-    #[IsGranted('EVENT_VIEW', subject: 'event_type')]
+    #[IsGranted('EVENT_VIEW', subject: 'event')]
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', [
-            'event_type' => $event,
+            'event' => $event,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('EVENT_EDIT', subject: 'event_type')]
+    #[IsGranted('EVENT_EDIT', subject: 'event')]
     public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
@@ -102,13 +102,13 @@ class EventController extends AbstractController
         }
 
         return $this->renderForm('event/edit.html.twig', [
-            'event_type' => $event,
+            'event' => $event,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
-    #[IsGranted('EVENT_DELETE', subject: 'event_type')]
+    #[Route('/{id}/delete', name: 'app_event_delete', methods: ['GET', 'POST'])]
+    #[IsGranted('EVENT_DELETE', subject: 'event')]
     public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         $isGet = $request->isMethod('GET');
