@@ -23,10 +23,12 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Pricing</h2>
-                    <h3>Check our <span>Pricing</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas
-                        atque vitae autem.</p>
+                    <h2>{{eventType.name}}</h2>
+                    {# <h3>Check our <span>Pricing</span></h3> #}
+                    {% if eventType.events|length == 0 %}
+                    <p>Aucun événement de type <strong>{{ eventType.name }}</strong> créé pour l'instant</p>
+                    {% endif %}
+                    
                 </div>
 
                 <div class="row">
