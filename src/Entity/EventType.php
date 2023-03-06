@@ -21,6 +21,9 @@ class EventType
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -69,6 +72,18 @@ class EventType
                 $event->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

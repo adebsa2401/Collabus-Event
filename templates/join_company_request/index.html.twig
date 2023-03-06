@@ -15,8 +15,8 @@
                                         <th>#</th>
                                         <th>Entreprise</th>
                                         <th>Evènement</th>
-                                        <th>Date</th>
-                                        <th>Heure</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -25,8 +25,8 @@
                                             <td>{{ loop.index }}</td>
                                             <td>{{ relation.requestedTo.name }}</td>
                                             <td>{{ relation.event.name }}</td>
-                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
-                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                            <td>{{ relation.startedAt|date('d/m/y à H:i') }}</td>
+                                            <td>{{ relation.endedAt|date('d/m/y à H:i') }}</td>
                                         </tr>
                                     {% else %}
                                         <tr class="odd">
@@ -57,8 +57,8 @@
                                         <th>#</th>
                                         <th>Entreprise</th>
                                         <th>Evènement</th>
-                                        <th>Date</th>
-                                        <th>Heure</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -69,8 +69,8 @@
                                             <td>{{ loop.index }}</td>
                                             <td>{{ relation.requestedTo.name }}</td>
                                             <td>{{ relation.event.name }}</td>
-                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
-                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                            <td>{{ relation.startedAt|date('d/m/y à H:i') }}</td>
+                                            <td>{{ relation.endedAt|date('d/m/y à H:i') }}</td>
                                             <td class="font-weight-medium">
                                                 {% if relation.status|lower == 'pending' %}
                                                     <span class="badge light badge-warning">En Attente</span>
@@ -117,8 +117,8 @@
                                         <th>#</th>
                                         <th>Entreprise</th>
                                         <th>Evènement</th>
-                                        <th>Date</th>
-                                        <th>Heure</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -129,8 +129,8 @@
                                             <td>{{ loop.index }}</td>
                                             <td>{{ relation.requestedBy.name }}</td>
                                             <td>{{ relation.event.name }}</td>
-                                            <td>{{ relation.scheduledAt|date('d/m/y') }}</td>
-                                            <td>{{ relation.scheduledAt|date('H:i') }}</td>
+                                            <td>{{ relation.startedAt|date('d/m/y à H:i') }}</td>
+                                            <td>{{ relation.endedAt|date('d/m/y à H:i') }}</td>
                                             <td class="font-weight-medium">
                                                 {% if relation.status|lower == 'pending' %}
                                                     <span class="badge light badge-warning">En Attente</span>

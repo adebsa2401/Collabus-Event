@@ -13,7 +13,12 @@ class JoinCompanyRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('scheduledAt', DateTimeType::class, [
+            ->add('startedAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                'required' => true,
+            ])
+            ->add('endedAt', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
                 'required' => true,

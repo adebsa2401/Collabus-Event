@@ -28,15 +28,18 @@ class JoinCompanyRequest
     #[ORM\JoinColumn(nullable: false)]
     private ?CompanyProfile $requestedTo = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $scheduledAt = null;
-
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'joinCompanyRequests')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Event $event = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $startedAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $endedAt = null;
 
     public function getId(): ?int
     {
@@ -79,18 +82,6 @@ class JoinCompanyRequest
         return $this;
     }
 
-    public function getScheduledAt(): ?\DateTimeImmutable
-    {
-        return $this->scheduledAt;
-    }
-
-    public function setScheduledAt(\DateTimeImmutable $scheduledAt): self
-    {
-        $this->scheduledAt = $scheduledAt;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -111,6 +102,30 @@ class JoinCompanyRequest
     public function setEvent(?Event $event): self
     {
         $this->event = $event;
+
+        return $this;
+    }
+
+    public function getStartedAt(): ?\DateTimeImmutable
+    {
+        return $this->startedAt;
+    }
+
+    public function setStartedAt(\DateTimeImmutable $startedAt): self
+    {
+        $this->startedAt = $startedAt;
+
+        return $this;
+    }
+
+    public function getEndedAt(): ?\DateTimeImmutable
+    {
+        return $this->endedAt;
+    }
+
+    public function setEndedAt(\DateTimeImmutable $endedAt): self
+    {
+        $this->endedAt = $endedAt;
 
         return $this;
     }

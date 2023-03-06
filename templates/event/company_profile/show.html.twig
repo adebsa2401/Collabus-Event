@@ -89,11 +89,11 @@
 											</td>
 											<td>{{ attendance.isVerified ? attendance.isVerifiedAt|date('d/m/y H:i') : '-' }}</td>
 											<td>
-												{% if attendance.representedCompany != app.user.companyProfile %}
+{#												{% if attendance.representedCompany != app.user.companyProfile %}#}
 													<a href="{{ path('app_join_company_request_new', {'id': attendance.id}) }}" data-toggle="tooltip" data-placement="top" title="Joindre">
 														<i class="mdi mdi-account-arrow-right text-success"></i>
 													</a>
-												{% endif %}
+{#												{% endif %}#}
 											</td>
 										</tr>
 									{% else %}

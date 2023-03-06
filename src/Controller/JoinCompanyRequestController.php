@@ -36,6 +36,11 @@ class JoinCompanyRequestController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($joinCompanyRequestRepository->findRelations($joinCompanyRequest->getStartedAt(), $joinCompanyRequest->getEndedAt())) {
+                $this->addFlash('danger', 'Une réunion est déjà prévue à cette date.');
+
+                return $this->redirectToRoute('app_join_company_request_new', ['id' => $eventAttendance->getId()], Response::HTTP_SEE_OTHER);
+            }
             $joinCompanyRequest
                 ->setRequestedAt(new \DateTimeImmutable())
             ;

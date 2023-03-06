@@ -1,5 +1,68 @@
 {% extends "auth_base.html.twig" %}
 
+{% block stylesheets %}
+    <link>
+        .fc-day-start-selected {
+            background-color: #00feff;
+        }
+
+        .fc-day-end-selected {
+            background-color: #00f;
+        }
+    </link>
+{% endblock %}
+
 {% block body %}
     {{ include('join_company_request/_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarEl = document.getElementById('calendar-holder');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: {
+                    url: '/fc-load-events'
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                dateClick: function(info) {
+                    info.dateStr = info.dateStr.slice(0, -1);
+
+                    if (info.view.type !== 'timeGridDay') {
+                        calendar.changeView('timeGridDay', info.dateStr);
+                        return;
+                    }
+
+                    const startedAtField = document.getElementById('join_company_request_startedAt');
+                    const endedAtField = document.getElementById('join_company_request_endedAt');
+
+                    if (startedAtField.value === '') {
+                        startedAtField.value = info.dateStr;
+                        return;
+                    }
+
+                    if ((new Date(startedAtField.value)).getTime() === (new Date(info.dateStr)).getTime()) {
+                        startedAtField.value = '';
+                        return;
+                    }
+
+                    if ((new Date(endedAtField.value)).getTime() === (new Date(info.dateStr)).getTime()) {
+                        endedAtField.value = '';
+                        return;
+                    }
+
+                    endedAtField.value = info.dateStr;
+                },
+                timeZone: 'UTC'
+            });
+
+            calendar.render();
+        });
+    </script>
 {% endblock %}

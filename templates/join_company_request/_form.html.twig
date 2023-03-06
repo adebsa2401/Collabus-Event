@@ -4,20 +4,40 @@
             <h4 class="card-title">Relations</h4>
             {{ form_start(form, {"attr": {"class": "form-sample"}}) }}
             <p class="card-description">
-                Entrer en relation avec <strong>{{ join_company_request.requestedTo.name }}</strong> pour l'évènement <strong>{{ join_company_request.event.name }}</strong>
+                Entrer en relation avec <strong>{{ join_company_request.requestedTo.name }}</strong> pour l'évènement
+                <strong>{{ join_company_request.event.name }}</strong>
             </p>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
-                        {{ form_label(form.scheduledAt, 'Date', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        {{ form_label(form.startedAt, 'Commence le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
                         <div class="col-sm-9">
-                            {{ form_widget(form.scheduledAt, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_widget(form.startedAt, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.endedAt, 'Fini le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.endedAt, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
             {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-12">
+                <div id="calendar-holder">
+                </div>
+            </div>
         </div>
     </div>
 </div>
