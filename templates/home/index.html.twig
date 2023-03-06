@@ -198,7 +198,7 @@
 
           {% for company in companies %}
             <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : asset('assets/img/clients/client-1.png') }}" class="img-fluid" alt="">
+              <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : asset('assets/img/clients/client-default.png') }}" class="img-fluid" alt="">
             </div>
           {% endfor %}
 
@@ -333,7 +333,7 @@
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
           {% for company in companies %}
             <div class="col-lg-4 col-md-6 portfolio-item {% for activityArea in company.activityAreas %}filter-{{ activityArea.name|u.snake }} {% endfor %}">
-              <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : asset('assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="{{ company.name }}">
+              <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : asset('assets/img/portfolio/portfolio-default.png') }}" class="img-fluid" alt="{{ company.name }}">
               <div class="portfolio-info">
                 <h4>{{ company.name }}</h4>
                 <p>{{ company.activityAreas|map(a => a.name)|join(' - ') }}</p>
