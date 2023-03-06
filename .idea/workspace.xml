@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/routes/calendar.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/img/testimonials/testimonials-5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/EventType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/EventType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/JoinCompanyRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/JoinCompanyRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/EventTypeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EventTypeType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/JoinCompanyRequestType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/JoinCompanyRequestType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event/company_profile/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event/company_profile/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event_type/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event_type/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/join_company_request/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/join_company_request/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -281,7 +253,8 @@
       <workItem from="1678024533929" duration="758000" />
       <workItem from="1678080929665" duration="4081000" />
       <workItem from="1678088349773" duration="4781000" />
-      <workItem from="1678094116564" duration="12646000" />
+      <workItem from="1678094116564" duration="12890000" />
+      <workItem from="1678109246352" duration="319000" />
     </task>
     <servers />
   </component>

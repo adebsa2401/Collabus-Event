@@ -1,17 +1,5 @@
 {% extends "auth_base.html.twig" %}
 
-{% block stylesheets %}
-    <link>
-        .fc-day-start-selected {
-            background-color: #00feff;
-        }
-
-        .fc-day-end-selected {
-            background-color: #00f;
-        }
-    </link>
-{% endblock %}
-
 {% block body %}
     {{ include('join_company_request/_form.html.twig') }}
 {% endblock %}
