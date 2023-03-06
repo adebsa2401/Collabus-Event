@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/event/company_profile/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event/company_profile/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/event_type/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/event_type/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +256,7 @@
       <workItem from="1678080929665" duration="4081000" />
       <workItem from="1678088349773" duration="4781000" />
       <workItem from="1678094116564" duration="12890000" />
-      <workItem from="1678109246352" duration="1351000" />
+      <workItem from="1678109246352" duration="2051000" />
     </task>
     <servers />
   </component>
