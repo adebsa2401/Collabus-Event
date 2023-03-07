@@ -19,33 +19,19 @@
                     left: 'prev,next today',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
-                dateClick: function(info) {
-                    info.dateStr = info.dateStr.slice(0, -1);
-
-                    if (info.view.type !== 'timeGridDay') {
-                        calendar.changeView('timeGridDay', info.dateStr);
-                        return;
-                    }
+                selectable: true,
+                dateClick: (info) => {
+                    calendar.changeView('timeGridDay', info.dateStr);
+                },
+                select: (info) => {
+                    info.startStr = info.startStr.slice(0, -1);
+                    info.endStr = info.endStr.slice(0, -1);
 
                     const startedAtField = document.getElementById('join_company_request_startedAt');
                     const endedAtField = document.getElementById('join_company_request_endedAt');
 
-                    if (startedAtField.value === '') {
-                        startedAtField.value = info.dateStr;
-                        return;
-                    }
-
-                    if ((new Date(startedAtField.value)).getTime() === (new Date(info.dateStr)).getTime()) {
-                        startedAtField.value = '';
-                        return;
-                    }
-
-                    if ((new Date(endedAtField.value)).getTime() === (new Date(info.dateStr)).getTime()) {
-                        endedAtField.value = '';
-                        return;
-                    }
-
-                    endedAtField.value = info.dateStr;
+                    startedAtField.value = info.startStr;
+                    endedAtField.value = info.endStr;
                 },
                 timeZone: 'UTC'
             });

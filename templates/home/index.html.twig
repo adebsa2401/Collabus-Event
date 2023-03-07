@@ -155,7 +155,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="icofont-simple-smile"></i>
+              <i class="icofont-company"></i>
               <span data-toggle="counter-up">{{ companies|length|number_format }}</span>
               <p>Entreprises</p>
             </div>
@@ -163,7 +163,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
-              <i class="icofont-document-folder"></i>
+              <i class="icofont-addons"></i>
               <span data-toggle="counter-up">{{ activityAreas|length|number_format }}</span>
               <p>Secteurs d'Activité</p>
             </div>
@@ -171,7 +171,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
-              <i class="icofont-live-support"></i>
+              <i class="icofont-meeting-add"></i>
               <span data-toggle="counter-up">{{ allEvents|length|number_format }}</span>
               <p>Evènements</p>
             </div>
@@ -179,7 +179,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
-              <i class="icofont-users-alt-5"></i>
+              <i class="icofont-meeting-add"></i>
               <span data-toggle="counter-up">{{ events|length|number_format }}</span>
               <p>Evènements en cours</p>
             </div>
@@ -222,7 +222,7 @@
             <ul id="portfolio-flters" class="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
               {% for eventType in eventTypes %}
-                <li data-filter=".filter-{{ eventType.name|u.snake }}">{{ eventType.name }}</li>
+                <li data-filter=".filter-event-{{ eventType.name|u.snake }}">{{ eventType.name }}</li>
               {% endfor %}
             </ul>
           </div>
@@ -230,7 +230,7 @@
 
         <div class="row portfolio-container">
           {% for event in allEvents %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-4 col-md-6 portfolio-item filter-event-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box">
                 <div class="icon"><i class="bx bxl-dribbble"></i></div>
                 <h4><a href="">{{ event.name }}</a></h4>
@@ -324,7 +324,7 @@
             <ul id="portfolio-flters" class="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
               {% for activityArea in activityAreas %}
-                <li data-filter=".filter-{{ activityArea.name|u.snake }}">{{ activityArea.name }}</li>
+                <li data-filter=".filter-company-{{ activityArea.name|u.snake }}">{{ activityArea.name }}</li>
               {% endfor %}
             </ul>
           </div>
@@ -332,7 +332,7 @@
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
           {% for company in companies %}
-            <div class="col-lg-4 col-md-6 portfolio-item {% for activityArea in company.activityAreas %}filter-{{ activityArea.name|u.snake }} {% endfor %}">
+            <div class="col-lg-4 col-md-6 portfolio-item {% for activityArea in company.activityAreas %}filter-company-{{ activityArea.name|u.snake }} {% endfor %}">
               <img src="{{ company.logo ? asset('uploads/company_logos/' ~ company.logo) : asset('assets/img/portfolio/portfolio-default.png') }}" class="img-fluid" alt="{{ company.name }}">
               <div class="portfolio-info">
                 <h4>{{ company.name }}</h4>
@@ -363,7 +363,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
-                <img src="{{ asset('assets/img/team/team-1.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('assets/img/team/team-1.png') }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
@@ -372,8 +372,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4>Expert CCI</h4>
+                <span>Expert</span>
               </div>
             </div>
           </div>
@@ -381,7 +381,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
-                <img src="{{ asset('assets/img/team/team-2.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('assets/img/team/team-2.png') }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
@@ -390,8 +390,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
+                <h4>Expert CCI</h4>
+                <span>Expert</span>
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="{{ asset('assets/img/team/team-3.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('assets/img/team/team-3.png') }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
@@ -408,8 +408,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
+                <h4>Expert CCI</h4>
+                <span>Expert</span>
               </div>
             </div>
           </div>
@@ -417,7 +417,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="{{ asset('assets/img/team/team-4.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('assets/img/team/team-4.png') }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="icofont-twitter"></i></a>
                   <a href=""><i class="icofont-facebook"></i></a>
@@ -426,8 +426,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
+                <h4>Expert CCI</h4>
+                <span>Expert</span>
               </div>
             </div>
           </div>
@@ -438,7 +438,7 @@
     </section><!-- End Team Section -->
 
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <section id="pricing" class="pricing portfolio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -449,10 +449,21 @@
           {% endif %}
         </div>
 
-        <div class="row">
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters" class="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              {% for eventType in eventTypes %}
+                <li data-filter=".filter-attendance-{{ eventType.name|u.snake }}">{{ eventType.name }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container">
 
           {% for event in events %}
-            <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-3 col-md-6 mt-4 mt-lg-0 portfolio-item filter-attendance-{{ event.type.name|u.snake }}" data-aos="fade-up" data-aos-delay="400">
               <div class="box">
                 <span class="advanced" style="background-color: {{ event.type.color }}">{{ event.type.name }}</span>
                 <h3>{{ event.name }}</h3>
@@ -476,79 +487,79 @@
     </section><!-- End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
-      <div class="container" data-aos="fade-up">
+{#    <section id="faq" class="faq section-bg">#}
+{#      <div class="container" data-aos="fade-up">#}
 
-        <div class="section-title">
-          <h2>F.A.Q</h2>
-          <h3>Frequently Asked <span>Questions</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
-        </div>
+{#        <div class="section-title">#}
+{#          <h2>F.A.Q</h2>#}
+{#          <h3>Frequently Asked <span>Questions</span></h3>#}
+{#          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>#}
+{#        </div>#}
 
-        <div class="row justify-content-center">
-          <div class="col-xl-10">
-            <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+{#        <div class="row justify-content-center">#}
+{#          <div class="col-xl-10">#}
+{#            <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">#}
 
-              <li>
-                <a data-toggle="collapse" class="" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="icofont-simple-up"></i></a>
-                <div id="faq1" class="collapse show" data-parent=".faq-list">
-                  <p>
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" class="" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq1" class="collapse show" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-              <li>
-                <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="icofont-simple-up"></i></a>
-                <div id="faq2" class="collapse" data-parent=".faq-list">
-                  <p>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq2" class="collapse" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-              <li>
-                <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="icofont-simple-up"></i></a>
-                <div id="faq3" class="collapse" data-parent=".faq-list">
-                  <p>
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq3" class="collapse" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-              <li>
-                <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="icofont-simple-up"></i></a>
-                <div id="faq4" class="collapse" data-parent=".faq-list">
-                  <p>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq4" class="collapse" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-              <li>
-                <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="icofont-simple-up"></i></a>
-                <div id="faq5" class="collapse" data-parent=".faq-list">
-                  <p>
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq5" class="collapse" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-              <li>
-                <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="icofont-simple-up"></i></a>
-                <div id="faq6" class="collapse" data-parent=".faq-list">
-                  <p>
-                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                  </p>
-                </div>
-              </li>
+{#              <li>#}
+{#                <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="icofont-simple-up"></i></a>#}
+{#                <div id="faq6" class="collapse" data-parent=".faq-list">#}
+{#                  <p>#}
+{#                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.#}
+{#                  </p>#}
+{#                </div>#}
+{#              </li>#}
 
-            </ul>
-          </div>
-        </div>
+{#            </ul>#}
+{#          </div>#}
+{#        </div>#}
 
-      </div>
-    </section><!-- End Frequently Asked Questions Section -->
+{#      </div>#}
+{#    </section><!-- End Frequently Asked Questions Section -->#}
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -556,32 +567,32 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <h3><span>Contact Us</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+          <h3><span>Nous Contacter</span></h3>
+{#          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>#}
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-6">
             <div class="info-box mb-4">
               <i class="bx bx-map"></i>
-              <h3>Our Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <h3>Notre Adresse</h3>
+              <p>Avenue du Général de GAULLE 01 BP 31 Cotonou - Bénin</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="info-box  mb-4">
               <i class="bx bx-envelope"></i>
-              <h3>Email Us</h3>
-              <p>contact@example.com</p>
+              <h3>Notre Email</h3>
+              <a href="mailto:http://www.ccibenin.org/">http://www.ccibenin.org/</a>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="info-box  mb-4">
               <i class="bx bx-phone-call"></i>
-              <h3>Call Us</h3>
-              <p>+1 5589 55488 55</p>
+              <h3>Téléphones</h3>
+              <p>(+229) 21 31 43 86 <br/>(+229) 21 31 20 81</p>
             </div>
           </div>
 
@@ -590,35 +601,35 @@
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 
           <div class="col-lg-6 ">
-            <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+            <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507133.9509306861!2d1.9945729309336386!3d6.7718020045940435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x102354e69ed7b9bf%3A0xe4577eef64b135c7!2sChambre%20de%20Commerce%20et%20de%20l&#39;Industrie%20du%20B%C3%A9nin!5e0!3m2!1sen!2sbj!4v1678182678743!5m2!1sen!2sbj" style="border:0; width: 100%; height: 384px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" data-rule="minlen:4" data-msg="Veuillez entrer au moins 4 caractères" />
                   <div class="validate"></div>
                 </div>
                 <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email" data-rule="email" data-msg="Veuillez entrer un mail valide" />
                   <div class="validate"></div>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" data-rule="minlen:4" data-msg="Veuillez entrer au moins 8 caractères" />
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Veuillez écrire un message" placeholder="Message"></textarea>
                 <div class="validate"></div>
               </div>
               <div class="mb-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div class="sent-message">Votre message a été reçu. Merci!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit">Envoyer Message</button></div>
             </form>
           </div>
 
