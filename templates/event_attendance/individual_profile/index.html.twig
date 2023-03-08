@@ -35,9 +35,11 @@
                                             </td>
                                             <td>{{ attendance.isVerified ? attendance.isVerifiedAt|date('d/m/y H:i') : '-' }}</td>
                                             <td>
-                                                <a href="{{ path('app_event_attendance_check_qr_code', {'id': attendance.id}) }}" data-toggle="tooltip" data-placement="top" title="Verifier">
-                                                    <i class="mdi mdi-check text-info"></i>
-                                                </a>
+                                                {% if not attendance.isVerified %}
+                                                    <a href="{{ path('app_event_attendance_check_qr_code', {'id': attendance.id}) }}" data-toggle="tooltip" data-placement="top" title="Verifier">
+                                                        <i class="mdi mdi-check text-info"></i>
+                                                    </a>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% else %}

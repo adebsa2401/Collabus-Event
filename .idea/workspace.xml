@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/home/company/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home/event/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/CalendarSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/CalendarSubscriber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/qr_code_scanner.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/qr_code_scanner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EventAttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EventAttendanceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event_attendance/check_qr_code.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event_attendance/check_qr_code.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event_attendance/individual_profile/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event_attendance/individual_profile/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,23 +184,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/adebsacompany/Documents/symfony_projects/ccievents/templates/home/event",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "/Applications/PhpStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/adebsacompany/Documents/symfony_projects/ccievents/templates/home/event&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/home/event" />
@@ -267,7 +262,8 @@
       <workItem from="1678184147664" duration="14000" />
       <workItem from="1678190213636" duration="1274000" />
       <workItem from="1678229377797" duration="598000" />
-      <workItem from="1678246747903" duration="11670000" />
+      <workItem from="1678246747903" duration="12216000" />
+      <workItem from="1678268519950" duration="2759000" />
     </task>
     <servers />
   </component>

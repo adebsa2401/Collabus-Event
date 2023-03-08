@@ -16,11 +16,17 @@ class EventAttendanceController extends AbstractController
     #[Route('/{id}/check-qr-code', name: 'app_event_attendance_check_qr_code', methods: ['GET', 'POST'])]
     public function checkQrCode(Request $request, EventAttendance $eventAttendance, EventAttendanceRepository $eventAttendanceRepository): Response
     {
+        if ($eventAttendance->isIsVerified()) {
+            $this->addFlash('info', 'Vous avez déjà scanné le QR code de cet événement.');
+
+            return $this->redirectToRoute('app_event_show', ['id' => $eventAttendance->getEvent()->getId()], Response::HTTP_SEE_OTHER);
+        }
+
         if ($request->isMethod('POST')) {
             $event = $eventAttendance->getEvent();
 
             if (!$qrCode = $request->request->get('qr_code')) {
-                $this->addFlash('error', 'Please upload a file');
+                $this->addFlash('danger', 'Veuillez scanner le QR code de l\'événement.');
 
                 return $this->render('event_attendance/check_qr_code.html.twig', [
                     'event_attendance' => $eventAttendance,
@@ -28,7 +34,7 @@ class EventAttendanceController extends AbstractController
             }
 
             if ($qrCode !== $event->getQrCode()) {
-                $this->addFlash('error', 'QR code is invalid');
+                $this->addFlash('danger', 'Le QR code scanné ne correspond pas à celui de l\'événement.');
 
                 return $this->render('event_attendance/check_qr_code.html.twig', [
                     'event_attendance' => $eventAttendance,
@@ -42,7 +48,7 @@ class EventAttendanceController extends AbstractController
 
             $eventAttendanceRepository->save($eventAttendance, true);
 
-            $this->addFlash('success', 'QR code is valid');
+            $this->addFlash('success', 'Votre présence a bien été enregistrée.');
             return $this->redirectToRoute('app_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
         }
 
