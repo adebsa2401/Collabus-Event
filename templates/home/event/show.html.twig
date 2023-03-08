@@ -1,0 +1,118 @@
+{% extends "home/base.html.twig" %}
+
+{% block body %}
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>{{ event.name }}</h2>
+                    <ol>
+                        <li><a href="{{ path('app_home') }}">Home</a></li>
+                        <li>{{ event.name }}</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- Breadcrumbs Section -->
+
+        <section id="skills" class="skills">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h3>{{event.name}}</h3>
+                    <h2>{{ event.place.name }}</h2>
+                </div>
+
+                <div class="row skills-content">
+                    <div class="col-lg-6">
+
+                        <div class="progress">
+                            {% set globalAttendanceRate = (globalAttendanceRate * 100)|number_format %}
+                            <span class="skill">Taux de participation <i class="val">{{ globalAttendanceRate }}%</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ globalAttendanceRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            {% set globalAttendanceValidationRate = (globalAttendanceValidationRate * 100)|number_format %}
+                            <span class="skill">Taux de présence <i class="val">{{ globalAttendanceValidationRate }}%</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ globalAttendanceValidationRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="progress">
+                            {% set individualsInterestRate = (individualsInterestRate * 100)|number_format %}
+                            <span class="skill">Taux d'interessement des particuliers <i class="val">{{ individualsInterestRate }}%</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ individualsInterestRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress">
+                            {% set companiesInterestRate = (companiesInterestRate * 100)|number_format %}
+                            <span class="skill">Taux d'interessement des Entreprises<i class="val">{{ companiesInterestRate }}%</i></span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ companiesInterestRate }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Skills Section -->
+
+        <!-- ======= Counts Section ======= -->
+        <section id="counts" class="counts">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="count-box">
+                            <i class="icofont-paper-plane"></i>
+                            <span data-toggle="counter-up">{{ event.participationRequests|length|number_format }}</span>
+                            <p>Requêtes</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+                        <div class="count-box">
+                            <i class="icofont-users"></i>
+                            <span data-toggle="counter-up">{{ event.attendances|length|number_format }}</span>
+                            <p>Participants</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                        <div class="count-box">
+                            <i class="icofont-users"></i>
+                            <span data-toggle="counter-up">{{ event.attendances|filter(a => a.isVerified)|length|number_format }}</span>
+                            <p>Présents</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                        <div class="count-box">
+                            <i class="icofont-chair"></i>
+                            <span data-toggle="counter-up">{{ event.place.standCount|number_format }}</span>
+                            <p>Places (Debout)</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                        <div class="count-box">
+                            <i class="icofont-chair"></i>
+                            <span data-toggle="counter-up">{{ event.place.sitCount|number_format }}</span>
+                            <p>Places (Assis)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Counts Section -->
+    </main>
+{% endblock %}

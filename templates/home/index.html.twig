@@ -155,7 +155,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="icofont-company"></i>
+              <i class="icofont-bank-alt"></i>
               <span data-toggle="counter-up">{{ companies|length|number_format }}</span>
               <p>Entreprises</p>
             </div>
@@ -214,7 +214,7 @@
         <div class="section-title">
           <h2>Evènements</h2>
           <h3><span>Nos évènements</span></h3>
-          <p>Visitez nos évènements à venir, en cours ou passés et consultez leurs statistiques en temps réel</p>
+{#          <p>Visitez nos évènements à venir, en cours ou passés et consultez leurs statistiques en temps réel</p>#}
         </div>
 
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
@@ -232,8 +232,8 @@
           {% for event in allEvents %}
             <div class="col-lg-4 col-md-6 portfolio-item filter-event-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box">
-                <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                <h4><a href="">{{ event.name }}</a></h4>
+                <div class="icon"><i class="bx bxs-calendar-event"></i></div>
+                <h4><a href="{{ path('app_home_event_show', {'id': event.id}) }}">{{ event.name }}</a></h4>
                 <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
               </div>
             </div>
@@ -337,8 +337,9 @@
               <div class="portfolio-info">
                 <h4>{{ company.name }}</h4>
                 <p>{{ company.activityAreas|map(a => a.name)|join(' - ') }}</p>
-                <a href="{{ company.logo ?? asset('assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ company.name }}"><i class="bx bx-plus"></i></a>
-                <a href="" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+{#                <a href="{{ company.logo ?? asset('assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ company.name }}"><i class="bx bx-plus"></i></a>#}
+                <a href="{{ path('app_home_company_show', {'id': company.id}) }}" class="preview-link" title="{{ company.name }}"><i class="bx bx-plus"></i></a>
+                <a href="{{ path('app_join_company_request_new', {'id': company.id}) }}" class="details-link" title="More Details" target="_blank" rel="noopener noreferrer"><i class="bx bx-link"></i></a>
               </div>
             </div>
           {% endfor %}
