@@ -39,17 +39,33 @@ class JoinCompanyRequestRepository extends ServiceEntityRepository
         }
     }
 
-    public function findRelations($start, $end): array
+    public function findRelations($company = null, $start = null, $end = null): array
     {
-        return $this->createQueryBuilder('j')
-            ->where('j.startedAt >= :start')
-            ->andWhere('j.startedAt <= :end')
-            ->orWhere('j.endedAt <= :end')
-            ->andWhere('j.endedAt >= :start')
-            ->andWhere('j.status = :status')
-            ->setParameter('start', $start)
-            ->setParameter('end', $end)
-            ->setParameter('status', JoinCompanyRequest::STATUS_ACCEPTED)
+        $builder = $this->createQueryBuilder('j')
+            ->where('j.status = :status')
+            ->setParameter('status', JoinCompanyRequest::STATUS_ACCEPTED);
+
+        if ($start) {
+            $builder
+                ->andWhere('j.startedAt >= :start')
+                ->andWhere('j.startedAt <= :end')
+                ->setParameter('start', $start);
+        }
+
+        if ($end) {
+            $builder
+                ->orWhere('j.endedAt <= :end')
+                ->andWhere('j.endedAt >= :start')
+                ->setParameter('end', $end);
+        }
+
+        if ($company) {
+            $builder
+                ->andWhere('j.requestedTo = :company')
+                ->setParameter('company', $company);
+        }
+
+        return $builder
             ->getQuery()
             ->getResult();
     }

@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Repository\CompanyRepository;
 use App\Repository\JoinCompanyRequestRepository;
 use CalendarBundle\CalendarEvents;
 use CalendarBundle\Entity\Event;
@@ -12,9 +13,12 @@ class CalendarSubscriber implements EventSubscriberInterface
 {
     private $joinCompanyRequestRepository;
 
-    public function __construct(JoinCompanyRequestRepository $joinCompanyRequestRepository)
+    private $companyRepository;
+
+    public function __construct(JoinCompanyRequestRepository $joinCompanyRequestRepository, CompanyRepository $companyRepository)
     {
         $this->joinCompanyRequestRepository = $joinCompanyRequestRepository;
+        $this->companyRepository = $companyRepository;
     }
 
     public static function getSubscribedEvents()
@@ -30,7 +34,9 @@ class CalendarSubscriber implements EventSubscriberInterface
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
-        foreach ($this->joinCompanyRequestRepository->findRelations($start, $end) as $request) {
+        $company = $this->companyRepository->find($filters['company_id']);
+
+        foreach ($this->joinCompanyRequestRepository->findRelations($company, $start, $end) as $request) {
             $calendar->addEvent(new Event(
                 'Réunion entre ' . $request->getRequestedBy()->getName() . ' et ' . $request->getRequestedTo()->getName(),
                 $request->getStartedAt(),

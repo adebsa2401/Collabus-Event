@@ -12,11 +12,27 @@
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: {
-                    url: '/fc-load-events'
+                validRange: {
+                    start: "{{ join_company_request.event.startedAt|date('Y-m-d') }}",
+                    end: "{{ join_company_request.event.endedAt|date('Y-m-d') }}"
                 },
+                eventSources: [
+                    {
+                        url: "/fc-load-events",
+                        method: "GET",
+                        extraParams: {
+                            filters: JSON.stringify({
+                                company_id: "{{ join_company_request.requestedTo.id }}",
+                            })
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
                 headerToolbar: {
                     left: 'prev,next today',
+                    center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
                 selectable: true,

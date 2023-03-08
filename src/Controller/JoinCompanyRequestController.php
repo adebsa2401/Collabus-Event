@@ -36,8 +36,18 @@ class JoinCompanyRequestController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($joinCompanyRequestRepository->findRelations($joinCompanyRequest->getStartedAt(), $joinCompanyRequest->getEndedAt())) {
+            if ($joinCompanyRequestRepository->findRelations($joinCompanyRequest->getRequestedTo(), $joinCompanyRequest->getStartedAt(), $joinCompanyRequest->getEndedAt())) {
                 $this->addFlash('danger', 'Une réunion est déjà prévue à cette date.');
+
+                return $this->redirectToRoute('app_join_company_request_new', ['id' => $eventAttendance->getId()], Response::HTTP_SEE_OTHER);
+            }
+
+            $insideEventDates =
+                $joinCompanyRequest->getStartedAt() >= $eventAttendance->getEvent()->getStartedAt()
+                && $joinCompanyRequest->getEndedAt() <= $eventAttendance->getEvent()->getEndedAt();
+
+            if (!$insideEventDates) {
+                $this->addFlash('danger', 'La réunion doit être dans les dates de l\'événement.');
 
                 return $this->redirectToRoute('app_join_company_request_new', ['id' => $eventAttendance->getId()], Response::HTTP_SEE_OTHER);
             }

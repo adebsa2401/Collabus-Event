@@ -9,7 +9,12 @@
       <change afterPath="$PROJECT_DIR$/templates/home/event/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/CalendarSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/CalendarSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +267,7 @@
       <workItem from="1678184147664" duration="14000" />
       <workItem from="1678190213636" duration="1274000" />
       <workItem from="1678229377797" duration="598000" />
-      <workItem from="1678246747903" duration="8059000" />
+      <workItem from="1678246747903" duration="11670000" />
     </task>
     <servers />
   </component>

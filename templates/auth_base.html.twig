@@ -39,6 +39,17 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+          {% for type, messages in app.flashes %}
+            {% for message in messages %}
+              <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                <strong>{{ type|capitalize }}:</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endfor %}
+
           {% block body %}{% endblock %}
         </div>
         <!-- content-wrapper ends -->
