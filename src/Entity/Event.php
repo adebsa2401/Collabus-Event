@@ -44,7 +44,7 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: JoinCompanyRequest::class, orphanRemoval: true)]
     private Collection $joinCompanyRequests;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: GalleryImage::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: GalleryImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $gallery;
 
     #[ORM\Column(length: 255)]

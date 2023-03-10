@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zxing\QrReader;
 
 #[Route('/event')]
@@ -28,13 +29,52 @@ class EventController extends AbstractController
 
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
     #[IsGranted('EVENT_CREATE')]
-    public function new(Request $request, EventRepository $eventRepository): Response
+    public function new(Request $request, EventRepository $eventRepository, SluggerInterface $slugger): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                try {
+                    $image->move(
+                        $this->getParameter('events_images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $event->setImageUrl($newFilename);
+            }
+
+            foreach ($form->get('gallery') as $imageGallery) {
+                if ($image = $imageGallery->get('image')->getData()) {
+                    $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                    try {
+                        $image->move(
+                            $this->getParameter('events_images_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    $imageGallery->getData()
+                        ->setUrl($newFilename)
+                        ->setEvent($event);
+                }
+            }
+
             $event->setQrCode(sha1(uniqid()));
             $eventRepository->save($event, true);
 

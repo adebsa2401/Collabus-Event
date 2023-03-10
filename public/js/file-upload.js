@@ -14,8 +14,9 @@
 (function($) {
   'use strict';
   $(function() {
-    $('.gallery').on('click', function(e) {
-      const fileInput = e.target.querySelector('.file-upload-browser');
+    $('.gallery').on('click', function() {
+      const fileInput = $(this).find('.file-upload-browse');
+
       if (fileInput) {
         fileInput.on('click', function() {
           var file = $(this).parent().parent().parent().find('.file-upload-default');
