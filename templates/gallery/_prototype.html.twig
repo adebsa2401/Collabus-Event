@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="form-group col-sm-4">
+		{{ form_label(form.name, 'Nom') }}
+		{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="form-group col-sm-4">
+		{{ form_label(form.image, 'Image') }}
+		{{ form_widget(form.image, {'attr': {'class': 'file-upload-default'}}) }}
+		<div class="input-group col-xs-12 col-sm-12 align-items-sm-center">
+			<input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+			<span class="input-group-append">
+				<button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+			</span>
+		</div>
+	</div>
+
+	<div class="form-group col-sm-4">
+		{{ form_label(form.description, 'Description') }}
+		{{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+	</div>
+</div>

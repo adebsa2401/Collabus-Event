@@ -1,55 +1,79 @@
 <div class="col-12 grid-margin">
-	<div class="card">
-		<div class="card-body">
-			<h4 class="card-title">Evènements</h4>
-			{{ form_start(form, {"attr": {"class": "form-sample"}}) }}
-			<p class="card-description">
-				Ajouter un évènement
-			</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group row">
-						{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-						<div class="col-sm-9">
-							{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'évènement'}}) }}
-						</div>
-					</div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group row">
-            {{ form_label(form.type, 'Type', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-            <div class="col-sm-9">
-              {{ form_widget(form.type, {'attr': {'class': 'js-example-basic-single w-100'}}) }}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Evènements</h4>
+            {{ form_start(form, {"attr": {"class": "form-sample"}}) }}
+            <p class="card-description">
+                Ajouter un évènement
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'évènement'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.type, 'Type', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.type, {'attr': {'class': 'js-example-basic-single w-100'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.place, 'Lieu', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.place, {'attr': {'class': 'js-example-basic-single w-100'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.startedAt, 'Démarre le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.startedAt, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.endedAt, 'Fini le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.endedAt, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        {{ form_label(form.image, 'Affiche') }}
+                        {{ form_widget(form.image, {'attr': {'class': 'file-upload-default'}}) }}
+                        <div class="input-group col-xs-12 col-sm-9 align-items-sm-center">
+                            <input type="text" class="form-control file-upload-info" disabled
+                                   placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <button type="button" class="btn btn-primary my-3 add_item_link" data-collection-holder-class="gallery">Ajouter
+                une image
+            </button>
+
+            <ul class="gallery list-group"
+                data-index="{{ form.gallery|length > 0 ? form.gallery|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ include('gallery/_prototype.html.twig', {'form': form.gallery.vars.prototype})|e('html_attr') }}"
+            ></ul>
+
+            <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
+            {{ form_widget(form._token) }}
+            {{ form_end(form, {render_rest: false}) }}
         </div>
-        <div class="col-md-6">
-          <div class="form-group row">
-            {{ form_label(form.place, 'Lieu', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-            <div class="col-sm-9">
-              {{ form_widget(form.place, {'attr': {'class': 'js-example-basic-single w-100'}}) }}
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-					<div class="form-group row">
-						{{ form_label(form.startedAt, 'Démarre le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-						<div class="col-sm-9">
-							{{ form_widget(form.startedAt, {'attr': {'class': 'form-control'}}) }}
-						</div>
-					</div>
-        </div>
-        <div class="col-md-6">
-					<div class="form-group row">
-						{{ form_label(form.endedAt, 'Fini le', {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-						<div class="col-sm-9">
-							{{ form_widget(form.endedAt, {'attr': {'class': 'form-control'}}) }}
-						</div>
-					</div>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
-      {{ form_end(form) }}
     </div>
-  </div>
 </div>

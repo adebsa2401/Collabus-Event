@@ -14,7 +14,7 @@
                 initialView: 'dayGridMonth',
                 validRange: {
                     start: "{{ join_company_request.event.startedAt|date('Y-m-d') }}",
-                    end: "{{ join_company_request.event.endedAt|date('Y-m-d') }}"
+                    end: "{{ join_company_request.event.endedAt|date_modify('+1 day')|date('Y-m-d') }}"
                 },
                 eventSources: [
                     {

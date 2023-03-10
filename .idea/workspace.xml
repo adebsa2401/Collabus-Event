@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/js/form-collection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gallery/_prototype.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/qr_code_scanner.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/qr_code_scanner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EventAttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EventAttendanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event_attendance/check_qr_code.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event_attendance/check_qr_code.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/event_attendance/individual_profile/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event_attendance/individual_profile/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/file-upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/file-upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/EventType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/EventType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth_base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/event/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/event/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/event/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/join_company_request/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +202,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Applications/PhpStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -263,7 +269,10 @@
       <workItem from="1678190213636" duration="1274000" />
       <workItem from="1678229377797" duration="598000" />
       <workItem from="1678246747903" duration="12216000" />
-      <workItem from="1678268519950" duration="3554000" />
+      <workItem from="1678268519950" duration="4129000" />
+      <workItem from="1678295722417" duration="11000" />
+      <workItem from="1678365811721" duration="5000" />
+      <workItem from="1678434468855" duration="7930000" />
     </task>
     <servers />
   </component>

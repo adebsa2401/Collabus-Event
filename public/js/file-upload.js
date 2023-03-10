@@ -10,3 +10,21 @@
     });
   });
 })(jQuery);
+
+(function($) {
+  'use strict';
+  $(function() {
+    $('.gallery').on('click', function(e) {
+      const fileInput = e.target.querySelector('.file-upload-browser');
+      if (fileInput) {
+        fileInput.on('click', function() {
+          var file = $(this).parent().parent().parent().find('.file-upload-default');
+          file.trigger('click');
+        });
+        $('.file-upload-default').on('change', function() {
+          $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+        });
+      }
+    });
+  });
+})(jQuery);

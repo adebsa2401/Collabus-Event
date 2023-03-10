@@ -44,11 +44,18 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: JoinCompanyRequest::class, orphanRemoval: true)]
     private Collection $joinCompanyRequests;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: GalleryImage::class, orphanRemoval: true)]
+    private Collection $gallery;
+
+    #[ORM\Column(length: 255)]
+    private ?string $imageUrl = null;
+
     public function __construct()
     {
         $this->participationRequests = new ArrayCollection();
         $this->attendances = new ArrayCollection();
         $this->joinCompanyRequests = new ArrayCollection();
+        $this->gallery = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +230,48 @@ class Event
                 $joinCompanyRequest->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GalleryImage>
+     */
+    public function getGallery(): Collection
+    {
+        return $this->gallery;
+    }
+
+    public function addGallery(GalleryImage $gallery): self
+    {
+        if (!$this->gallery->contains($gallery)) {
+            $this->gallery->add($gallery);
+            $gallery->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(GalleryImage $gallery): self
+    {
+        if ($this->gallery->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getEvent() === $this) {
+                $gallery->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }
