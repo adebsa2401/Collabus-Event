@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/public/js/file-upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/file-upload.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EventController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/JoinCompanyRequestRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/event/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event/_form.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home/event/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/event/show.html.twig" afterDir="false" />
     </list>
@@ -269,7 +270,7 @@
       <workItem from="1678295722417" duration="11000" />
       <workItem from="1678365811721" duration="5000" />
       <workItem from="1678434468855" duration="8719000" />
-      <workItem from="1678451111310" duration="4232000" />
+      <workItem from="1678451111310" duration="5605000" />
     </task>
     <servers />
   </component>

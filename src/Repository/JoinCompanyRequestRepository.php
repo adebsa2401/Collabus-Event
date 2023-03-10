@@ -45,18 +45,24 @@ class JoinCompanyRequestRepository extends ServiceEntityRepository
             ->where('j.status = :status')
             ->setParameter('status', JoinCompanyRequest::STATUS_ACCEPTED);
 
-        if ($start) {
+        if ($start && $end) {
             $builder
                 ->andWhere('j.startedAt >= :start')
                 ->andWhere('j.startedAt <= :end')
-                ->setParameter('start', $start);
-        }
-
-        if ($end) {
-            $builder
-                ->orWhere('j.endedAt <= :end')
-                ->andWhere('j.endedAt >= :start')
+                ->orWhere('j.endedAt >= :start')
+                ->andWhere('j.endedAt <= :end')
+                ->orWhere('j.startedAt <= :start')
+                ->andWhere('j.endedAt >= :end')
+                ->setParameter('start', $start)
                 ->setParameter('end', $end);
+        } elseif ($end) {
+            $builder
+                ->andWhere('j.startedAt <= :end')
+                ->setParameter('end', $end);
+        } elseif ($start) {
+            $builder
+                ->andWhere('j.endedAt >= :start')
+                ->setParameter('start', $start);
         }
 
         if ($company) {
