@@ -82,7 +82,7 @@ class HomeController extends AbstractController
     #[Route('/public/event-type/{id}', name: 'app_home_event_type_show', methods: ['GET'])]
     public function eventTypeShow(EventType $eventType, EventRepository $eventRepository): Response
     {
-        $events = $eventRepository->findUpcomingEvents();
+        $events = $eventRepository->findUpcomingEvents($eventType);
         return $this->render('home/event_type/show.html.twig', compact('eventType', 'events'));
     }
 
