@@ -40,8 +40,17 @@
                     calendar.changeView('timeGridDay', info.dateStr);
                 },
                 select: (info) => {
-                    info.startStr = info.startStr.slice(0, -1);
-                    info.endStr = info.endStr.slice(0, -1);
+                    if (info.startStr.includes('T')) {
+                        info.startStr = info.startStr.slice(0, -1);
+                    } else {
+                        info.startStr += 'T00:00';
+                    }
+
+                    if (info.endStr.includes('T')) {
+                        info.endStr = info.endStr.slice(0, -1);
+                    } else {
+                        info.endStr += 'T00:00';
+                    }
 
                     const startedAtField = document.getElementById('join_company_request_startedAt');
                     const endedAtField = document.getElementById('join_company_request_endedAt');
