@@ -4,10 +4,10 @@
 
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
-        {% include 'partials/_dashboard_admin.html.twig' %}
-    {% elseif is_granted('ROLE_INDIVDUAL') %}
-        {% include 'partials/_dashboard_individual.html.twig' %}
+        {{ include('partials/_dashboard_admin.html.twig') }}
+    {% elseif is_granted('ROLE_INDIVIDUAL') %}
+        {{ include('partials/_dashboard_individual.html.twig') }}
     {% elseif is_granted('ROLE_COMPANY') %}
-        {% include 'partials/_dashboard_company.html.twig' %}
+        {{ include('partials/_dashboard_company.html.twig') }}
     {% endif %}
 {% endblock %}

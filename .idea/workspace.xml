@@ -8,6 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/EventRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EventRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/_dashboard_company.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_dashboard_company.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/_dashboard_individual.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_dashboard_individual.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +275,7 @@
       <workItem from="1678662174445" duration="9822000" />
       <workItem from="1678706400393" duration="12000" />
       <workItem from="1678710553129" duration="859000" />
-      <workItem from="1678711447647" duration="231000" />
+      <workItem from="1678711447647" duration="3639000" />
     </task>
     <servers />
   </component>

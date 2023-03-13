@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Evènements</p>
+                <p class="fs-30 mb-2">{{ events|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Evènements à venir</p>
+                <p class="fs-30 mb-2">{{ events|filter(e => e.startedAt > date('now'))|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4 stretch-card transparent">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Evènements en cours</p>
+                <p class="fs-30 mb-2">{{ events|filter(e => (e.startedAt <= date('now')) and (e.endedAt >= date('now')))|length|number_format }}</p>
+            </div>
+        </div>
+    </div>
+</div>
