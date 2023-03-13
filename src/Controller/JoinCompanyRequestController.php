@@ -68,10 +68,23 @@ class JoinCompanyRequestController extends AbstractController
     #[Route('/{id}/accept', name: 'app_join_company_request_accept', methods: ['GET', 'POST'])]
     public function accept(JoinCompanyRequest $joinCompanyRequest, JoinCompanyRequestRepository $joinCompanyRequestRepository): Response
     {
+        if ($joinCompanyRequestRepository->findRelations($joinCompanyRequest->getRequestedTo(), $joinCompanyRequest->getStartedAt(), $joinCompanyRequest->getEndedAt())) {
+            $this->addFlash('danger', 'Une réunion est déjà prévue à cette date.');
+
+            return $this->redirectToRoute('app_join_company_request_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         $joinCompanyRequest
             ->setStatus(JoinCompanyRequest::STATUS_ACCEPTED)
         ;
         $joinCompanyRequestRepository->save($joinCompanyRequest, true);
+
+        foreach ($joinCompanyRequestRepository->findPendingRequests($joinCompanyRequest->getRequestedTo(), $joinCompanyRequest->getStartedAt(), $joinCompanyRequest->getEndedAt()) as $pendingRequest) {
+            $pendingRequest
+                ->setStatus(JoinCompanyRequest::STATUS_REJECTED)
+            ;
+            $joinCompanyRequestRepository->save($pendingRequest, true);
+        }
 
         return $this->redirectToRoute('app_join_company_request_index', [], Response::HTTP_SEE_OTHER);
     }

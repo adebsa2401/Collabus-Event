@@ -39,20 +39,15 @@ class JoinCompanyRequestRepository extends ServiceEntityRepository
         }
     }
 
-    public function findRelations($company = null, $start = null, $end = null): array
+    public function findRequests($company = null, $start = null, $end = null, $status = null): array
     {
-        $builder = $this->createQueryBuilder('j')
-            ->where('j.status = :status')
-            ->setParameter('status', JoinCompanyRequest::STATUS_ACCEPTED);
+        $builder = $this->createQueryBuilder('j');
 
         if ($start && $end) {
             $builder
-                ->andWhere('j.startedAt >= :start')
-                ->andWhere('j.startedAt <= :end')
-                ->orWhere('j.endedAt >= :start')
-                ->andWhere('j.endedAt <= :end')
-                ->orWhere('j.startedAt <= :start')
-                ->andWhere('j.endedAt >= :end')
+                ->where('j.startedAt >= :start AND j.startedAt <= :end')
+                ->orWhere('j.endedAt >= :start AND j.endedAt <= :end')
+                ->orWhere('j.startedAt <= :start AND j.endedAt >= :end')
                 ->setParameter('start', $start)
                 ->setParameter('end', $end);
         } elseif ($end) {
@@ -71,9 +66,25 @@ class JoinCompanyRequestRepository extends ServiceEntityRepository
                 ->setParameter('company', $company);
         }
 
+        if ($status) {
+            $builder
+                ->andWhere('j.status = :status')
+                ->setParameter('status', $status);
+        }
+
         return $builder
             ->getQuery()
             ->getResult();
+    }
+
+    public function findPendingRequests($company = null, $start = null, $end = null): array
+    {
+        return $this->findRequests($company, $start, $end, JoinCompanyRequest::STATUS_PENDING);
+    }
+
+    public function findRelations($company = null, $start = null, $end = null): array
+    {
+        return $this->findRequests($company, $start, $end, JoinCompanyRequest::STATUS_ACCEPTED);
     }
 
 //    /**
