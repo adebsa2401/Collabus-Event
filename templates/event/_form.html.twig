@@ -69,11 +69,16 @@
             <ul class="gallery list-group"
                 data-index="{{ form.gallery|length > 0 ? form.gallery|last.vars.name + 1 : 0 }}"
                 data-prototype="{{ include('gallery/_prototype.html.twig', {'form': form.gallery.vars.prototype})|e('html_attr') }}"
-            ></ul>
+            >
+                {% for image in form.gallery %}
+                    {{ include('gallery/_prototype.html.twig', {'form': image}) }}
+                {% else %}
+                    {{ form_widget(form.gallery) }}
+                {% endfor %}
+            </ul>
 
             <button type="submit" class="btn btn-primary mr-2">{{ submit_label ?? 'Enregistrer' }}</button>
-            {{ form_widget(form._token) }}
-            {{ form_end(form, {render_rest: false}) }}
+            {{ form_end(form) }}
         </div>
     </div>
 </div>

@@ -230,13 +230,14 @@
 
         <div class="row portfolio-container">
           {% for event in allEvents %}
-            <div class="col-lg-4 col-md-6 portfolio-item filter-event-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bxs-calendar-event"></i></div>
-                <h4><a href="{{ path('app_home_event_show', {'id': event.id}) }}">{{ event.name }}</a></h4>
-{#                <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>#}
+            <a href="{{ path('app_home_event_show', {'id': event.id}) }}" class="col-lg-4 col-md-6 portfolio-item filter-event-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon-box p-0">
+                <div class="member-img">
+                  <img src="{{ asset('uploads/events_images/' ~ event.imageUrl) }}" class="img-fluid" alt="">
+                </div>
+                <h4 class="m-5">{{ event.name }}</h4>
               </div>
-            </div>
+            </a>
           {% endfor %}
         </div>
 

@@ -34,6 +34,7 @@ class GalleryImageType extends AbstractType
                             'image/*',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid logo image',
+                        'maxSizeMessage' => 'The logo image is too large. Max size is 1MB.',
                     ])
                 ],
             ])

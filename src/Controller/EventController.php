@@ -8,6 +8,7 @@ use App\Form\EventType;
 use App\Form\ParticipateEventCompanyProfileType;
 use App\Repository\EventParticipationRequestRepository;
 use App\Repository\EventRepository;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,26 +30,17 @@ class EventController extends AbstractController
 
     #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
     #[IsGranted('EVENT_CREATE')]
-    public function new(Request $request, EventRepository $eventRepository, SluggerInterface $slugger): Response
+    public function new(Request $request, EventRepository $eventRepository, FileUploader $fileUploader): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-            if ($image) {
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
-
-                try {
-                    $image->move(
-                        $this->getParameter('events_images_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+            if ($image = $form->get('image')->getData()) {
+                if (!$newFilename = $fileUploader->upload($image, $this->getParameter('events_images_directory'))) {
+                    $this->addFlash('danger', 'Une erreur est survenue lors du téléversement de l\'image');
+                    return $this->redirectToRoute('app_event_new');
                 }
 
                 $event->setImageUrl($newFilename);
@@ -56,17 +48,9 @@ class EventController extends AbstractController
 
             foreach ($form->get('gallery') as $imageGallery) {
                 if ($image = $imageGallery->get('image')->getData()) {
-                    $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
-
-                    try {
-                        $image->move(
-                            $this->getParameter('events_images_directory'),
-                            $newFilename
-                        );
-                    } catch (FileException $e) {
-                        // ... handle exception if something happens during file upload
+                    if (!$newFilename = $fileUploader->upload($image, $this->getParameter('events_images_directory'))) {
+                        $this->addFlash('danger', 'Une erreur est survenue lors du téléversement de l\'image');
+                        return $this->redirectToRoute('app_event_new');
                     }
 
                     $imageGallery->getData()
@@ -130,12 +114,34 @@ class EventController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
     #[IsGranted('EVENT_EDIT', subject: 'event')]
-    public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
+    public function edit(Request $request, Event $event, EventRepository $eventRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($image = $form->get('image')->getData()) {
+                if (!$newFilename = $fileUploader->upload($image, $this->getParameter('events_images_directory'))) {
+                    $this->addFlash('danger', 'Une erreur est survenue lors du téléversement de l\'image');
+                    return $this->redirectToRoute('app_event_new');
+                }
+
+                $event->setImageUrl($newFilename);
+            }
+
+            foreach ($form->get('gallery') as $imageGallery) {
+                if ($image = $imageGallery->get('image')->getData()) {
+                    if (!$newFilename = $fileUploader->upload($image, $this->getParameter('events_images_directory'))) {
+                        $this->addFlash('danger', 'Une erreur est survenue lors du téléversement de l\'image');
+                        return $this->redirectToRoute('app_event_new');
+                    }
+
+                    $imageGallery->getData()
+                        ->setUrl($newFilename)
+                        ->setEvent($event);
+                }
+            }
+
             $eventRepository->save($event, true);
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
