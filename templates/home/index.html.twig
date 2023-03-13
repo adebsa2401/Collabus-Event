@@ -233,7 +233,7 @@
             <a href="{{ path('app_home_event_show', {'id': event.id}) }}" class="col-lg-4 col-md-6 portfolio-item filter-event-{{ event.type.name|u.snake }}" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon-box p-0">
                 <div class="member-img">
-                  <img src="{{ asset('uploads/events_images/' ~ event.imageUrl) }}" class="img-fluid" alt="">
+                  <img src="{{ asset('uploads/events_images/' ~ event.imageUrl) }}" class="img-fluid" style="aspect-ratio: 16/9" alt="">
                 </div>
                 <h4 class="m-5">{{ event.name }}</h4>
               </div>
