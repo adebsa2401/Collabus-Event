@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="81be508f-ddaf-4bb8-b910-00dd6b01c39d" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/Service/FileUploader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EventController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/JoinCompanyRequestController.php" afterDir="false" />
@@ -274,7 +275,7 @@
       <workItem from="1678463773301" duration="943000" />
       <workItem from="1678617632911" duration="6000" />
       <workItem from="1678620321196" duration="1000" />
-      <workItem from="1678662174445" duration="7906000" />
+      <workItem from="1678662174445" duration="7994000" />
     </task>
     <servers />
   </component>
